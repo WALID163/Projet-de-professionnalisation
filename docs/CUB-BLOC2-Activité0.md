@@ -115,8 +115,8 @@ sudo apt install qrencode
 On s'assurera également que la connexion SSH entre le poste client et le serveur Debian est pleinement opérationnelle. Si ce n'est pas le cas, il sera impératif d'installer le service OpenSSH sur le serveur Debian 12 (`sudo apt install openssh-server`).
 
 ```bash
-ssh etudiant@192.168.1.90
-etudiant@192.168.1.90's password:
+ssh etudiant@172.16.52.3
+etudiant@172.16.52.3's password:
 Linux serveur 6.1.0-17-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.69-1 (2023-12-30) x...
 
 The programs included with the Debian GNU/Linux system are free software;
@@ -125,7 +125,7 @@ individual files in /usr/share/doc/*/copyright.
 
 Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
 permitted by applicable law.
-Last login: Wed Jan  3 19:34:10 2024 from 192.168.1.85
+Last login: Thu Sep  3 10:12:21 2026 from 172.16.30.151
 etudiant@serveur:~$
 ```
 
@@ -239,9 +239,9 @@ Nous pouvons ensuite supprimer le fichier PNG contenant le QR code, car il conti
 Sur le client, nous pouvons lancer une connexion SSH vers le serveur avec le compte etudiant. Après avoir entré votre mot de passe, un OTP vous est demandé. Dans l'application FreeOTP+, sélectionnez la nouvelle configuration. Celle-ci vous fournit un code de 6 chiffres valable 30 secondes.
 
 ```bash
-ssh etudiant@192.168.1.90
-(etudiant@192.168.1.90) Password:
-(etudiant@192.168.1.90) One-time password (OATH) for `etudiant`:
+ssh etudiant@172.16.52.3
+(etudiant@172.16.52.3) Password:
+(etudiant@172.16.52.3) One-time password (OATH) for `etudiant`:
 Linux serveur 6.1.0-17-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.69-1 (2023-12-30) x...
 
 The programs included with the Debian GNU/Linux system are free software;
@@ -250,6 +250,6 @@ individual files in /usr/share/doc/*/copyright.
 
 Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
 permitted by applicable law.
-Last login: Wed Jan  3 22:17:13 2024 from 192.168.1.85
+Last login: Thu Sep  3 11:07:53 2026 from 172.16.30.151
 etudiant@serveur:~$
 ```
