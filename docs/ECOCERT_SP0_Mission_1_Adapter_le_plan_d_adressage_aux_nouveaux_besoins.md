@@ -104,3 +104,19 @@ Ensuite, on fait +1 sur l'IP de broadcast pour obtenir la première IP du procha
 | **IP Src** | **Port Src** | **IP Dst** | **Port Dst** | **IP Src** | **Port Src** | **IP Dst** | **Port Dst** |
 | 192.168.2.x/24 | X | X | X | 172.16.32.2 | X | X | X |
 | 192.168.22.x/30 | X | X | X | 172.16.32.2 | X | X | X |
+
+---
+
+## Schémas
+
+### Schéma logique
+
+![Schéma Logique]([https://raw.githubusercontent.com/WALID163/MilleNuits-mkdocs/refs/heads/main/images/cub-schema-brassage-gp2.png](https://raw.githubusercontent.com/WALID163/Projet-de-professionnalisation/refs/heads/main/images/ECOCERT%20-%20SP0%20Mission%201%20-%20Sch%C3%A9ma%20logique%20ECOCERT.png))
+
+### Schéma physique
+
+![Schéma Physique]([https://raw.githubusercontent.com/WALID163/MilleNuits-mkdocs/refs/heads/main/images/cub-schema-brassage-gp2.png](https://raw.githubusercontent.com/WALID163/Projet-de-professionnalisation/refs/heads/main/images/ECOCERT%20-%20SP0%20Mission%201%20-%20Sch%C3%A9ma%20physique%20ECOCERT.png))
+
+### Schéma de brassage
+
+![Schéma Brassage]([https://raw.githubusercontent.com/WALID163/MilleNuits-mkdocs/refs/heads/main/images/cub-schema-brassage-gp2.png](https://raw.githubusercontent.com/WALID163/Projet-de-professionnalisation/refs/heads/main/images/ECOCERT%20-%20SP0%20Mission%201%20-%20Sch%C3%A9ma%20brassage%20ECOCERT.png))
