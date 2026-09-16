@@ -15,7 +15,12 @@ nav:
     - BLOC 2:
       - BLOC 2 Situation 1 Préparation de la maquette et premiers paramétrages du serveur Windows2025: CUB-BLOC2-Situation1-ServWindowsCore.md
     - BLOC 3:
-      - BLOC 3 Situation 1 Cybersécurité: CUB-BLOC3-Situation1-Cybersécurité.md
+      - Situation 1 Cybersécurité:
+        - BLOC 3 Situation 1 Cybersécurité: CUB-BLOC3-Situation1-Cybersécurité.md
+      - Situation 3 Cybersécurité:
+        - BLOC 3 Situation 3 Cybersécurité: CUB-BLOC3-Cybersécurité-Situation3.md
+        - BLOC 3 Situation 3 Cybersécurité: CUB-BLOC3-Recette-Situation3.md
+      
   - Millenuits:
     - Accueil : aproposMilleNuits.md
     - SP1 Gestion de l’infrastructure réseau: 
