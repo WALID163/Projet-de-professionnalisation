@@ -5,11 +5,11 @@ nav:
   - Accueil : index.md
   - ECOCERT:
     - Accueil : aproposECOCERT.md
-    - SP0 Ecocert:
-      - Mission 1 Adapter le plan d'adressage aux nouveaux besoins:
-        - 01 Mission 1 Maquettage infrastructure reseau: ECOCERT_SP0_Mission_1_Adapter_le_plan_d'adressage_aux_nouveaux_besoins.md
-     - Mission 2 Mise en place dans un environnement virtuel d’un contrôleur de domaine et d’un service DHCP:
-      - 01 Mission 2 Mise en place du Windows Server et de Keadhcp: ECOCERT_SP0_Mission_2_Mise_en_place_du_Windows_Server_et_de_Keadhcp.md
+       - SP0 Ecocert:
+         - Mission 1 Adapter le plan d'adressage aux nouveaux besoins:
+           - 01 Mission 1 Maquettage infrastructure reseau: ECOCERT_SP0_Mission_1_Adapter_le_plan_d'adressage_aux_nouveaux_besoins.md
+         - Mission 2 Mise en place dans un environnement virtuel d'un contrôleur de domaine et d'un service DHCP:
+           - 01 Mission 2 Mise en place du Windows Server et de Keadhcp: ECOCERT_SP0_Mission_2_Mise_en_place_du_Windows_Server_et_de_Keadhcp.md
   - CUB:
     - Accueil : aproposCUB.md
     - BLOC 2:
