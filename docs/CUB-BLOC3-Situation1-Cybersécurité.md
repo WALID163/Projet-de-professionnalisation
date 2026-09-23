@@ -112,7 +112,7 @@ Avec l'aide de ce tableau, il sera possible de segmenter le réseau local (VLSM)
 
 ## 7. Réaliser un plan d'affectation des port par VLAN pour les éléments actifs de votre agence.
 
-![Schéma Brassage](https://github.com/WALID163/Projet-de-professionnalisation/blob/dae9bd3e559be268486582052cdf650a5581bbca/images/cub-schema-brassage-gp2.drawio.png)
+![Schéma Brassage](https://raw.githubusercontent.com/WALID163/Projet-de-professionnalisation/refs/heads/main/images/cub-schema-brassage-gp2.drawio.png)
 
 ## 8. Réaliser une maquette de la nouvelle infrastructure du site à l'aide du logiciel Packet Tracer. Le pare-feu du site sera représenté par un routeur.
 
