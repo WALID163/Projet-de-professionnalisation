@@ -13,7 +13,13 @@ nav:
   - CUB:
     - Accueil : aproposCUB.md
     - BLOC 2:
-      - BLOC 2 Situation 1 Préparation de la maquette et premiers paramétrages du serveur Windows2025: CUB-BLOC2-Situation1-ServWindowsCore.md
+      - Situation 1 Infra:
+        - BLOC 2 Situation 1 Préparation de la maquette et premiers paramétrages du serveur Windows2025: CUB-BLOC2-Situation1-ServWindowsCore.md
+      - Activité 1 ExploitServ:
+        - BLOC 2 Activité 1 Mise en place de serveur DNS au sein de l-entreprise CUB:
+          - BLOC 2 Activité 1 Configuration DNS récursif: BLOC2-Activité1-ExploitServ-DNSRConf.md
+          - BLOC 2 Activité 1 Configuration DNS Maitre: BLOC2-Activité1-ExploitServ-DNSAConf.md
+          - BLOC 2 Activité 1 Configuration DNS Maitre esclave: BLOC2-Activité1-ExploitServ-DNSAEsclaveConf.md
     - BLOC 3:
       - Situation 1 Cybersécurité:
         - BLOC 3 Situation 1 Cybersécurité: CUB-BLOC3-Situation1-Cybersécurité.md
