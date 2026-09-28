@@ -95,6 +95,7 @@ Ensuite, on fait +1 sur l'IP de broadcast pour obtenir la première IP du procha
 | MODEM ADSL | 172.16.32.0 | 255.255.255.0 | 172.16.32.2 | 172.16.32.2 | C |
 | SWITCH L3 | 192.168.22.252 | 255.255.255.252 | 192.168.22.253 | 192.168.22.253 | C |
 | SWITCH L3 | 192.168.2.0 | 255.255.255.0 | 192.168.22.254 | 192.168.22.253 | S |
+| SERVEURS | 172.16.52.0 | 255.255.255.0 | 192.168.22.254 | 192.168.22.253 | S |
 | NA | 0.0.0.0 | 0.0.0.0 | 172.16.32.253 | 172.16.32.2 | S* |
 
 ### ECOCERT Table de NAT
@@ -104,6 +105,7 @@ Ensuite, on fait +1 sur l'IP de broadcast pour obtenir la première IP du procha
 | **IP Src** | **Port Src** | **IP Dst** | **Port Dst** | **IP Src** | **Port Src** | **IP Dst** | **Port Dst** |
 | 192.168.2.x/24 | X | X | X | 172.16.32.2 | X | X | X |
 | 192.168.22.x/30 | X | X | X | 172.16.32.2 | X | X | X |
+| 172.16.52.x/24 | X | X | X | 172.16.32.2 | X | X | X |
 
 ---
 
