@@ -8,7 +8,7 @@
 
 **Commande utilisée :** `ping www.google.fr`
 
-- [ ] Réussite
+- [X] Réussite
 - [ ] Échec
 
 En cas d'échec, proposer une hypothèse expliquant le dysfonctionnement.
@@ -25,7 +25,7 @@ En cas d'échec, proposer une hypothèse expliquant le dysfonctionnement.
 
 **Commande utilisée :** Sur Google `192.36.2.10`
 
-- [ ] Réussite
+- [X] Réussite
 - [ ] Échec
 
 En cas d'échec, proposer une hypothèse expliquant le dysfonctionnement.
@@ -42,7 +42,7 @@ En cas d'échec, proposer une hypothèse expliquant le dysfonctionnement.
 
 **Commande utilisée :** `ping 192.36.253.254`
 
-- [ ] Réussite
+- [X] Réussite
 - [ ] Échec
 
 En cas d'échec, proposer une hypothèse expliquant le dysfonctionnement.
@@ -59,7 +59,7 @@ En cas d'échec, proposer une hypothèse expliquant le dysfonctionnement.
 
 **Commande utilisée :** Sur Stormshield.
 
-- [ ] Réussite
+- [X] Réussite
 - [ ] Échec
 
 En cas d'échec, proposer une hypothèse expliquant le dysfonctionnement.
