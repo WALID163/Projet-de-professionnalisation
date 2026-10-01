@@ -19,9 +19,10 @@ nav:
         - BLOC 2 Sitaution 2 Installation d-un centre d-administration des serveurs windows WAC: CUB-BLOC2-Situation2-ServWindowsWAC.md
       - Activité 1 ExploitServ:
         - BLOC 2 Activité 1 Mise en place de serveur DNS au sein de l-entreprise CUB:
-          - BLOC 2 Activité 1 Configuration DNS récursif: BLOC2-Activité1-ExploitServ-DNSRConf.md
-          - BLOC 2 Activité 1 Configuration DNS Maitre: BLOC2-Activité1-ExploitServ-DNSAConf.md
-          - BLOC 2 Activité 1 Configuration DNS Maitre esclave: BLOC2-Activité1-ExploitServ-DNSAEsclaveConf.md
+          - BLOC 2 Activité 1 Configuration DNS récursif: CUB-BLOC2-Activité1-ExploitServ-DNSRConf.md
+          - BLOC 2 Activité 1 Configuration DNS Maitre: CUB-BLOC2-Activité1-ExploitServ-DNSAConf.md
+          - BLOC 2 Activité 1 Configuration DNS Maitre esclave: CUB-BLOC2-Activité1-ExploitServ-DNSAEsclaveConf.md
+          - BLOC 2 Activité 1 Fiche recette DNS: CUB-BLOC2-Activité1-ExploitServ-RecetteDNS.md
     - BLOC 3:
       - Situation 1 Cybersécurité:
         - BLOC 3 Situation 1 Cybersécurité: CUB-BLOC3-Situation1-Cybersécurité.md
