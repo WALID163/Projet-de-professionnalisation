@@ -23,7 +23,7 @@ nav:
         - BLOC 2 Activité 1 Mise en place de serveur DNS au sein de l-entreprise CUB:
           - BLOC 2 Activité 1 Configuration DNS récursif: CUB-BLOC2-Activité1-ExploitServ-DNSRConf.md
           - BLOC 2 Activité 1 Configuration DNS Maitre: CUB-BLOC2-Activité1-ExploitServ-DNSAConf.md
-          - BLOC 2 Activité 1 Configuration DNS Maitre esclave: CUB-BLOC2-Activité1-ExploitServ-DNSAEsclaveConf.md
+          - BLOC 2 Activité 1 Configuration DNS Esclave: CUB-BLOC2-Activité1-ExploitServ-DNSAEsclaveConf.md
           - BLOC 2 Activité 1 Configuration DNS Délégation: CUB-BLOC2-Activité1-ExploitServ-DélégationDNS.md
           - BLOC 2 Activité 1 Fiche recette DNS: CUB-BLOC2-Activité1-ExploitServ-RecetteDNS.md
     - BLOC 3:
