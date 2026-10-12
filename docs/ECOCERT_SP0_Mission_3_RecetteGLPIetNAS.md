@@ -23,7 +23,7 @@ En cas d'échec, proposer une hypothèse expliquant le dysfonctionnement.
 
 ### 2.TrueNas accessible.
 
-**Commande utilisée :** `172.16.52.20 (sur une moteur de recherche)`
+**Commande utilisée :** `172.16.52.20 (sur un moteur de recherche)`
 
 - [X] Réussite
 - [ ] Échec
