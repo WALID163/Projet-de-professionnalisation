@@ -20,6 +20,7 @@ nav:
         - 01 Mission 1 La création / modification des comptes utilisateurs: ECOCERT_SP1_Mission_1_Creation_Modification.md
       - Mission 2 La suppression des comptes des utilisateurs ayant quitté ECOCERT:
         - 01 Mission 1 La suppression des comptes des utilisateurs: ECOCERT_SP1_Mission_2_Suppression.md
+      - Mission 1&2 Recette pour les Scripts de l'AD: ECOCERT_SP1_Mission_1et2_RecetteScriptsAD.md
 
   - CUB:
     - Accueil : aproposCUB.md
