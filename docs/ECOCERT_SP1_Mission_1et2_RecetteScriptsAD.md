@@ -75,6 +75,7 @@ En cas d'échec, proposer une hypothèse expliquant le dysfonctionnement.
 ### 5. Les dossiers "Logs" et "Etat" qui contient les Hash des .csv sont disponible dans le dossier "Ecocert".
 
 **Commande utilisée :** `cd C:\Ecocert` `dir` `cd Logs` `dir` `cd ..\Etat` `dir`
+
 **Remarque :** Vous pouvez utiliser la commande `type` pour afficher le contenu d'un fichier.
 
 - [X] Réussite
