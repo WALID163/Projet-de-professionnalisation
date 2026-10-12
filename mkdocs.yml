@@ -11,8 +11,14 @@ nav:
       - Mission 2 Mise en place dans un environnement virtuel d'un contrôleur de domaine et d'un service DHCP:
         - 01 Mission 2 Mise en place du Windows Server et de Keadhcp: ECOCERT_SP0_Mission_2_Mise_en_place_du_Windows_Server_et_de_Keadhcp.md
       - Mission 3 Mise en place d’un serveur de gestion d’incidents et d’un serveur NAS:
-        - 01 Mission 3 Mise en place du serveur GLPI et NAS: ECOCERT_SP0_Mission_3_ServeursGLPIetNAS.md
-        - 02 Mission 3 Recette du serveur GLPI et NAS: ECOCERT_SP0_Mission_3_RecetteGLPIetNAS.md
+      	- 01 Mission 3 Mise en place du serveur GLPI et NAS: ECOCERT_SP0_Mission_3_ServeursGLPIetNAS.md
+      	- 02 Mission 3 Recette du serveur GLPI et NAS: ECOCERT_SP0_Mission_3_RecetteGLPIetNAS.md
+    - SP1 Ecocert automatiser la gestion des utilisateurs:
+      - Mission 1 La création / modification des comptes utilisateurs en suivant la norme interne à ECOCERT:
+        - 01 Mission 1 La création / modification des comptes utilisateurs: ECOCERT_SP1_Mission_1_Creation_Modification.md
+      - Mission 2 La suppression des comptes des utilisateurs ayant quitté ECOCERT:
+        - 01 Mission 1 La suppression des comptes des utilisateurs: ECOCERT_SP1_Mission_2_Suppression.md
+
   - CUB:
     - Accueil : aproposCUB.md
     - BLOC 2:
