@@ -1,350 +1,92 @@
-# ECOCERT – SP1 – Mission 1 : Création / modification des comptes utilisateurs
+# ECOCERT – SP1 – Mission 1 : Création des comptes utilisateurs
 
 **Auteur :** Crys Boisseau
 **Date :** 12/10/2026
-**Périmètre :** création et mise à jour des comptes Active Directory selon la norme interne ECOCERT.
+**Périmètre :** création des comptes Active Directory à partir du fichier CSV, selon la norme interne ECOCERT.
 
 > **Note :** les commentaires ci-dessous sont ajoutés à des fins pédagogiques. Si le code est réutilisé tel quel avec PowerShell 5.1, enregistrer le fichier en UTF-8 avec BOM (ou retirer les accents des commentaires).
 
 ## Norme interne ECOCERT appliquée
 
-- Login : `prenom.nom` (sAMAccountName **et** UPN)
-- Mail : `p.nom@<domaine mail>` sans doublon (suffixe 2, 3… si besoin)
-- OU = nom du service (un `/` crée une OU imbriquée)
-- Mobile au format `33 x xx xx xx xx`
-- Dossier privé `nom.prenom` dans le partage *Données*, lecteur `P:`
+- Login : `prenom.nom` en minuscules (sAMAccountName **et** UPN)
+- UPN : `prenom.nom@local.ecocert1.lan`
+- Mail : `p.nom@local.ecocert1.lan` (initiale du prénom + nom)
+- OU = nom du service (l'OU doit déjà exister dans l'annuaire)
+- Mobile au format `+33 x xx xx xx xx`
+- Mot de passe initial identique pour tous, à changer à la 1ère connexion
 
-Fichiers de cette mission : `Common.ps1`, `Sync-Utilisateurs.ps1`, `Run-Auto.ps1`, `Install-TachePlanifiee.ps1`.
+Fichier de cette mission : `Gestion-Utilisateurs.ps1` (un seul fichier, composé de deux parties : la création, décrite ici, et la suppression, décrite dans la Mission 2).
 
----
-
-## 1. Common.ps1 – configuration et fonctions partagées
-
-```powershell
-# ==========================================================================
-# Common.ps1 - configuration et fonctions partagees (a "dot-sourcer")
-# A executer sur le serveur AD / fichiers, en administrateur du domaine.
-# NB : pas d'accents dans les chaines pour eviter les soucis d'encodage
-#      avec PowerShell 5.1 (le nom du partage est construit avec [char]0xE9).
-# ==========================================================================
-Import-Module ActiveDirectory -ErrorAction Stop   # Charge le module AD ; stoppe le script s'il est absent
-
-$script:Dom = Get-ADDomain   # Récupère les infos du domaine courant (nom DNS, NetBIOS, DN)
-
-$script:Cfg = @{   # Table de configuration unique utilisée par tous les scripts
-    DomaineDNS      = $script:Dom.DNSRoot               # Nom DNS du domaine = suffixe UPN réel (ex. local.ecocert2.fr)
-    NetBIOS         = $script:Dom.NetBIOSName           # Nom court du domaine (ex. LOCAL), utilisé pour les droits NTFS
-    BaseDN          = $script:Dom.DistinguishedName     # Racine de l'annuaire où seront créées les OU
-    DomaineMail     = 'local.ecocert2.fr'               # Domaine des adresses mail p.nom@...
-    ServeurFichiers = $env:COMPUTERNAME                 # Le serveur de fichiers est la machine qui exécute le script
-    NomPartage      = "Donn$([char]0xE9)es"             # Nom du partage "Données" (é construit via son code Unicode)
-    DossierPartage  = "C:\Donn$([char]0xE9)es"          # Chemin local du dossier partagé
-    DossierArchive  = 'C:\Anciens Collaborateurs'       # Dossier d'archivage des comptes supprimés (Mission 2)
-    DossierLogs     = 'C:\Ecocert\Logs'                 # Dossier des journaux
-    LecteurReseau   = 'P:'                              # Lettre du lecteur réseau privé (HomeDrive)
-    MotDePasseInit  = 'etudiant_007'                    # Mot de passe initial, à changer à la 1ère connexion
-}   # Fin de la table de configuration
-
-if (-not (Test-Path $Cfg.DossierLogs)) { New-Item -ItemType Directory -Path $Cfg.DossierLogs -Force | Out-Null }   # Crée le dossier de logs s'il n'existe pas
-$script:LogFile = Join-Path $Cfg.DossierLogs ("ecocert_{0}.log" -f (Get-Date -Format 'yyyy-MM'))   # Un fichier de log par mois (ecocert_AAAA-MM.log)
-
-function Write-Log {   # Écrit un message horodaté dans le log et à l'écran
-    param([ValidateSet('INFO','WARN','ERREUR')][string]$Niveau = 'INFO', [string]$Message)   # Niveau limité à 3 valeurs, INFO par défaut
-    $ligne = '{0} [{1}] {2}' -f (Get-Date -Format 'yyyy-MM-dd HH:mm:ss'), $Niveau, $Message   # Construit "date [NIVEAU] message"
-    Add-Content -Path $script:LogFile -Value $ligne -Encoding UTF8   # Ajoute la ligne au fichier de log
-    switch ($Niveau) {   # Affichage à l'écran selon le niveau
-        'WARN'   { Write-Host $ligne -ForegroundColor Yellow }   # Avertissement en jaune
-        'ERREUR' { Write-Host $ligne -ForegroundColor Red }      # Erreur en rouge
-        default  { Write-Host $ligne }                           # Information en couleur normale
-    }   # Fin du switch
-}   # Fin de Write-Log
-
-# "Hélène-Marie" -> "helene-marie" (minuscules, sans accents ni caracteres speciaux)
-function ConvertTo-Ascii {   # Normalise un texte pour les logins / mails / dossiers
-    param([string]$Texte)   # Texte à convertir
-    $sb = New-Object System.Text.StringBuilder   # Constructeur de chaîne pour assembler le résultat
-    foreach ($c in $Texte.Normalize([Text.NormalizationForm]::FormD).ToCharArray()) {   # Sépare chaque lettre de son accent (é -> e + ´) puis parcourt les caractères
-        if ([Globalization.CharUnicodeInfo]::GetUnicodeCategory($c) -ne 'NonSpacingMark') { [void]$sb.Append($c) }   # Garde le caractère sauf s'il s'agit d'un accent isolé
-    }   # Fin de la boucle
-    return ($sb.ToString().ToLower() -replace '[^a-z0-9\-]', '')   # Minuscules + suppression de tout sauf lettres, chiffres et tiret
-}   # Fin de ConvertTo-Ascii
-
-# 0665436578 -> "33 6 65 43 65 78" ; retourne $null si le numero est invalide
-function ConvertTo-IntlPhone {   # Convertit un numéro français au format international ECOCERT
-    param([string]$Brut)   # Numéro saisi tel quel dans le CSV
-    $d = $Brut -replace '\D', ''   # Ne garde que les chiffres (retire espaces, points, +, etc.)
-    if ($d -match '^0(\d{9})$')       { $n = $Matches[1] }   # Format 0XXXXXXXXX : on retire le 0 initial
-    elseif ($d -match '^33(\d{9})$')  { $n = $Matches[1] }   # Format 33XXXXXXXXX : on retire le préfixe 33
-    else { return $null }   # Tout autre format = numéro invalide
-    return '33 {0} {1} {2} {3} {4}' -f $n.Substring(0,1), $n.Substring(1,2), $n.Substring(3,2), $n.Substring(5,2), $n.Substring(7,2)   # Découpe en 1-2-2-2-2 chiffres derrière "33"
-}   # Fin de ConvertTo-IntlPhone
-
-# Detecte ; ou , selon l'en-tete du CSV (les deux fichiers fournis n'ont pas le meme separateur)
-function Import-CsvAuto {   # Importe un CSV en détectant automatiquement son séparateur
-    param([string]$Path)   # Chemin du CSV
-    $entete = Get-Content -Path $Path -TotalCount 1 -Encoding UTF8   # Lit uniquement la 1ère ligne (en-tête)
-    $sep = if ($entete -match ';') { ';' } else { ',' }   # Point-virgule s'il y en a un, sinon virgule
-    return Import-Csv -Path $Path -Delimiter $sep -Encoding UTF8   # Importe le fichier avec le bon séparateur
-}   # Fin de Import-CsvAuto
-
-# Cree le dossier partage racine "Donnees" s'il n'existe pas (acces filtre selon les droits : ABE)
-function Initialize-Share {   # Prépare le dossier et le partage SMB racine
-    if (-not (Test-Path $Cfg.DossierPartage)) { New-Item -ItemType Directory -Path $Cfg.DossierPartage -Force | Out-Null }   # Crée le dossier local s'il manque
-    if (-not (Get-SmbShare -Name $Cfg.NomPartage -ErrorAction SilentlyContinue)) {   # Si le partage n'existe pas encore
-        $tous = (New-Object System.Security.Principal.SecurityIdentifier('S-1-1-0')).Translate([System.Security.Principal.NTAccount]).Value   # Résout le groupe "Tout le monde" (SID S-1-1-0) dans la langue du serveur
-        New-SmbShare -Name $Cfg.NomPartage -Path $Cfg.DossierPartage -FullAccess $tous -FolderEnumerationMode AccessBased -ErrorAction Stop | Out-Null   # Crée le partage ; ABE : chacun ne voit que les dossiers auxquels il a droit
-        Write-Log INFO "Partage '$($Cfg.NomPartage)' cree sur $($Cfg.DossierPartage)"   # Trace la création
-    }   # Fin du if partage
-}   # Fin de Initialize-Share
-
-# Droits NTFS : heritage coupe ; SYSTEM + Administrateurs en controle total ;
-# si $Compte est fourni, ce compte seul a en plus le droit Modifier.
-function Set-FolderAcl {   # Applique les droits NTFS d'un dossier privé
-    param([string]$Path, [string]$Compte)   # Dossier cible et compte propriétaire (peut être $null)
-    $inh = 'ContainerInherit,ObjectInherit'   # Les droits s'appliquent aux sous-dossiers et fichiers
-    $acl = New-Object System.Security.AccessControl.DirectorySecurity   # Crée une ACL vide
-    $acl.SetAccessRuleProtection($true, $false)   # Coupe l'héritage et ne copie pas les droits hérités
-    foreach ($sid in 'S-1-5-18', 'S-1-5-32-544') {   # SYSTEM puis groupe Administrateurs
-        $id = New-Object System.Security.Principal.SecurityIdentifier($sid)   # Identité à partir du SID (indépendant de la langue)
-        $acl.AddAccessRule((New-Object System.Security.AccessControl.FileSystemAccessRule($id, 'FullControl', $inh, 'None', 'Allow')))   # Contrôle total autorisé
-    }   # Fin de la boucle SID
-    for ($i = 1; $i -le 6; $i++) {   # Jusqu'à 6 tentatives (le compte AD peut ne pas être encore répliqué)
-        try {   # Tentative d'application des droits
-            $a = $acl   # Par défaut : ACL admins + SYSTEM uniquement
-            if ($Compte) {   # Si un propriétaire est fourni
-                $a = New-Object System.Security.AccessControl.DirectorySecurity   # Nouvelle ACL de travail
-                $a.SetAccessRuleProtection($true, $false)   # Héritage coupé
-                foreach ($r in $acl.Access) { $a.AddAccessRule($r) }   # Recopie les règles admins/SYSTEM
-                $nt = New-Object System.Security.Principal.NTAccount($Cfg.NetBIOS, $Compte)   # Compte au format DOMAINE\login
-                $a.AddAccessRule((New-Object System.Security.AccessControl.FileSystemAccessRule($nt, 'Modify', $inh, 'None', 'Allow')))   # Ajoute le droit Modifier pour l'utilisateur
-            }   # Fin du if compte
-            Set-Acl -Path $Path -AclObject $a -ErrorAction Stop   # Applique l'ACL au dossier
-            return   # Succès : on sort de la fonction
-        } catch {   # En cas d'échec
-            if ($i -eq 6) { throw }   # Dernière tentative ratée : on remonte l'erreur
-            Start-Sleep -Seconds 2   # Sinon on attend la réplication du compte puis on réessaie
-        }   # Fin du catch
-    }   # Fin de la boucle de tentatives
-}   # Fin de Set-FolderAcl
-```
+Le script se lance à la main, dans PowerShell en administrateur, **depuis le dossier qui contient les CSV** (les chemins `.\` sont relatifs au dossier courant).
 
 ---
 
-## 2. Sync-Utilisateurs.ps1 – création / mise à jour des comptes
+## 1. Gestion-Utilisateurs.ps1 – partie 1 : création des comptes
 
 ```powershell
-<#
-.SYNOPSIS
-  Cree ou met a jour les utilisateurs AD depuis SP1utilisateursEcocert.csv.
-.DESCRIPTION
-  - login prenom.nom (sAMAccountName ET UPN), mail p.nom@<DomaineMail> sans doublon
-  - OU = nom du service (un "/" dans le service cree une OU imbriquee : Service/SousService)
-  - mobile au format "33 x xx xx xx xx", fonction et bureau si colonnes "fonction" / "bureau" presentes
-  - dossier prive nom.prenom dans le partage Donnees (droits : proprietaire seul + admins)
-  - lecteur P: (HomeDrive) = chemin UNC du dossier
-  Relancer le script apres modification du CSV = mise a jour (idempotent).
-  Utiliser -WhatIf pour simuler.
-#>
-[CmdletBinding(SupportsShouldProcess)]   # Active -WhatIf / -Confirm (mode simulation)
-param([string]$CsvPath = (Join-Path $PSScriptRoot 'SP1utilisateursEcocert.csv'))   # Chemin du CSV, par défaut celui du dossier du script
+Import-Module ActiveDirectory   # Charge le module AD (New-ADUser, Remove-ADUser...)
 
-. (Join-Path $PSScriptRoot 'Common.ps1')   # Charge la configuration et les fonctions communes
+# 1. CRÉATION DES UTILISATEURS
+$utilisateurs = Import-Csv -Path ".\SP1utilisateursEcocert.csv" -Delimiter ","   # Lit le CSV des utilisateurs (dossier courant, séparateur virgule)
 
-function Get-OuDn {   # Retourne le DN de l'OU d'un service, en la créant si besoin
-    param([string]$Service)   # Nom du service (ex. "Informatique/Support")
-    $parent = $Cfg.BaseDN   # On part de la racine du domaine
-    foreach ($part in ($Service -split '[/\\]' | ForEach-Object { $_.Trim() } | Where-Object { $_ })) {   # Découpe sur / ou \, nettoie et ignore les parties vides
-        $nomOu = $part -replace "'", "''"   # Double les apostrophes pour le filtre AD
-        $ou = Get-ADOrganizationalUnit -Filter "Name -eq '$nomOu'" -SearchBase $parent -SearchScope OneLevel   # Cherche l'OU directement sous le parent
-        if (-not $ou) {   # Si elle n'existe pas
-            $ou = New-ADOrganizationalUnit -Name $part -Path $parent -PassThru   # On la crée et on récupère l'objet
-            Write-Log INFO "OU creee : $($ou.DistinguishedName)"   # Trace la création
-        }   # Fin du if OU
-        $parent = $ou.DistinguishedName   # L'OU trouvée/créée devient le parent du niveau suivant
-    }   # Fin de la boucle sur les niveaux
-    return $parent   # DN final de l'OU cible
-}   # Fin de Get-OuDn
+foreach ($ligne in $utilisateurs) {   # Traite chaque ligne du CSV
+    $nom = $ligne.nom.Trim()   # Nom, sans espaces parasites
+    $prenom = $ligne.prenom.Trim()   # Prénom, sans espaces parasites
+    $service = $ligne.service.Trim()   # Service (détermine l'OU)
+    $telMobileBrut = $ligne.telMobile   # Numéro de mobile tel que saisi dans le CSV
+    
+    $samAccountName = "$prenom.$nom".ToLower()   # Login prenom.nom en minuscules
+    $userPrincipalName = "$samAccountName@local.ecocert1.lan"   # UPN = login@domaine
+    $email = "$($prenom.Substring(0,1)).$nom".ToLower() + "@local.ecocert1.lan"   # Mail : initiale du prénom + nom + domaine
+    
+    $telephone = $null   # Téléphone vide par défaut
+    if (-not [string]::IsNullOrEmpty($telMobileBrut) -and $telMobileBrut -ne "NaN") {   # Si un numéro est renseigné (ni vide, ni "NaN")
+        $telNet = $telMobileBrut.ToString().Replace(".", "").Replace(" ", "")   # Retire les points et les espaces
+        if ($telNet.StartsWith("0")) {   # Si le numéro commence par 0
+            $telNet = $telNet.Substring(1)   # On retire le 0 initial
+        }   # Fin du if
+        $telephone = "+33 $(([string]$telNet)[0]) $(([string]$telNet).Substring(1,2)) $(([string]$telNet).Substring(3,2)) $(([string]$telNet).Substring(5,2)) $(([string]$telNet).Substring(7,2))"   # Découpe en 1-2-2-2-2 chiffres derrière "+33"
+    }   # Fin du if téléphone
 
-function Get-UniqueMail {   # Génère une adresse mail unique p.nom@domaine
-    param([string]$PrenomN, [string]$NomN, [string]$ExcluSam)   # Prénom/nom normalisés, compte à ignorer (le sien)
-    $i = 1   # Compteur de tentatives
-    do {   # Boucle jusqu'à trouver une adresse libre
-        $suffixe = if ($i -eq 1) { '' } else { "$i" }   # Pas de suffixe au 1er essai, puis 2, 3...
-        $mail = '{0}.{1}{2}@{3}' -f $PrenomN.Substring(0,1), $NomN, $suffixe, $Cfg.DomaineMail   # Initiale du prénom + nom + suffixe + domaine
-        $conflit = Get-ADUser -Filter "mail -eq '$mail' -or proxyAddresses -eq 'smtp:$mail'" |   # Cherche un compte qui utilise déjà cette adresse
-                   Where-Object { $_.SamAccountName -ne $ExcluSam }   # Ignore le compte de la personne elle-même
-        $i++   # Prochain essai
-    } while ($conflit)   # Recommence tant qu'il y a un conflit
-    if ($suffixe) { Write-Log WARN "Doublon d'adresse evite : $mail" }   # Signale qu'un suffixe a été nécessaire
-    return $mail   # Adresse finale libre
-}   # Fin de Get-UniqueMail
+    $ouPath = "OU=$service,DC=local,DC=ecocert1,DC=lan"   # Chemin de l'OU du service (elle doit déjà exister)
+    $password = ConvertTo-SecureString "Ecocert2026!" -AsPlainText -Force   # Mot de passe initial converti en SecureString
 
-$rows = Import-CsvAuto -Path $CsvPath   # Lit le CSV des utilisateurs (séparateur détecté automatiquement)
-$pwd  = ConvertTo-SecureString $Cfg.MotDePasseInit -AsPlainText -Force   # Convertit le mot de passe initial en SecureString
-$cpt  = @{ Cree = 0; Modifie = 0; Inchange = 0; Erreur = 0 }   # Compteurs pour le bilan final
-
-Initialize-Share   # S'assure que le dossier et le partage "Données" existent
-
-foreach ($row in $rows) {   # Traite chaque ligne du CSV
-    try {   # Une erreur sur une ligne ne bloque pas les suivantes
-        $nom     = "$($row.nom)".Trim()       # Nom, sans espaces parasites
-        $prenom  = "$($row.prenom)".Trim()    # Prénom
-        $service = "$($row.service)".Trim()   # Service (détermine l'OU)
-        if (-not $nom -or -not $prenom -or -not $service) { Write-Log WARN "Ligne incomplete ignoree : $($row | ConvertTo-Json -Compress)"; continue }   # Ignore une ligne sans nom, prénom ou service
-
-        $nomN = ConvertTo-Ascii $nom         # Nom normalisé (minuscules, sans accent)
-        $prenomN = ConvertTo-Ascii $prenom   # Prénom normalisé
-        $sam = "$prenomN.$nomN"              # Login prenom.nom
-        if ($sam.Length -gt 20) { $sam = $sam.Substring(0,20).TrimEnd('.'); Write-Log WARN "Login tronque a 20 caracteres (limite pre-Windows 2000) : $sam" }   # Limite sAMAccountName à 20 caractères
-        $upn = "$prenomN.$nomN@$($Cfg.DomaineDNS)"   # UPN = login@domaine
-
-        $fonction = if ($row.PSObject.Properties['fonction']) { "$($row.fonction)".Trim() } else { '' }   # Fonction si la colonne existe
-        $bureau   = if ($row.PSObject.Properties['bureau'])   { "$($row.bureau)".Trim() }   else { '' }   # Bureau si la colonne existe
-        $tel      = $null   # Téléphone par défaut vide
-        $telBrut  = "$($row.telMobile)".Trim()   # Numéro brut du CSV
-        if ($telBrut) {   # Si un numéro est fourni
-            $tel = ConvertTo-IntlPhone $telBrut   # Conversion au format "33 x xx xx xx xx"
-            if (-not $tel) { Write-Log WARN "$sam : numero invalide '$telBrut' (mobile non renseigne)" }   # Numéro invalide : on ne renseigne pas le mobile
-        }   # Fin du if téléphone
-
-        $dossier = "$nomN.$prenomN"   # Nom du dossier privé : nom.prenom
-        $local   = Join-Path $Cfg.DossierPartage $dossier   # Chemin local du dossier
-        $unc     = "\\$($Cfg.ServeurFichiers)\$($Cfg.NomPartage)\$dossier"   # Chemin UNC (réseau) du dossier
-
-        if (-not $PSCmdlet.ShouldProcess($sam, 'Creer ou mettre a jour')) { continue }   # En mode -WhatIf : simule et passe à la ligne suivante
-
-        $ouDn = Get-OuDn $service   # DN de l'OU du service (créée si nécessaire)
-        # Retrouve un compte existant : login prenom.nom, OU UPN identique, OU ancien login "NOM Prenom"
-        $nomQ = $nom -replace "'", "''"; $prenomQ = $prenom -replace "'", "''"   # Échappe les apostrophes pour le filtre
-        $u = Get-ADUser -Filter "SamAccountName -eq '$sam' -or UserPrincipalName -eq '$upn' -or SamAccountName -eq '$nomQ $prenomQ'" `   # Recherche par login, UPN ou ancien format "NOM Prenom"
-             -Properties mail, mobile, title, physicalDeliveryOfficeName, HomeDirectory, HomeDrive | Select-Object -First 1   # Charge les attributs utiles, garde le 1er résultat
-
-        if (-not $u) {   # CAS 1 : le compte n'existe pas -> création
-            $mail = Get-UniqueMail $prenomN $nomN $null   # Adresse mail unique
-            $p = @{   # Paramètres du nouveau compte
-                Name = "$nom $prenom"; GivenName = $prenom; Surname = $nom; DisplayName = "$nom $prenom"   # Identité affichée
-                SamAccountName = $sam; UserPrincipalName = $upn; EmailAddress = $mail   # Login, UPN, mail
-                Path = $ouDn; AccountPassword = $pwd; Enabled = $true; ChangePasswordAtLogon = $true   # OU, mot de passe initial, compte actif, changement obligatoire
-                HomeDrive = $Cfg.LecteurReseau; HomeDirectory = $unc   # Lecteur P: pointant vers le dossier privé
-            }   # Fin des paramètres
-            if ($tel)      { $p.MobilePhone = $tel }    # Ajoute le mobile s'il est valide
-            if ($fonction) { $p.Title = $fonction }     # Ajoute la fonction
-            if ($bureau)   { $p.Office = $bureau }      # Ajoute le bureau
-            New-ADUser @p   # Crée le compte avec tous les paramètres (splatting)
-            Write-Log INFO "CREE : $sam ($mail) dans $ouDn"   # Trace la création
-            $cpt.Cree++   # Incrémente le compteur de créations
-        } else {   # CAS 2 : le compte existe -> mise à jour
-            $s = @{}   # Table des attributs à modifier
-            if ($u.SamAccountName -ne $sam)      { $s.SamAccountName = $sam }        # Aligne le login sur la norme
-            if ($u.UserPrincipalName -ne $upn)   { $s.UserPrincipalName = $upn }     # Aligne l'UPN
-            if ($tel      -and $u.mobile -ne $tel)                          { $s.MobilePhone = $tel }       # Met à jour le mobile s'il diffère
-            if ($fonction -and $u.title -ne $fonction)                      { $s.Title = $fonction }        # Met à jour la fonction
-            if ($bureau   -and $u.physicalDeliveryOfficeName -ne $bureau)   { $s.Office = $bureau }         # Met à jour le bureau
-            if ($u.HomeDirectory -ne $unc -or $u.HomeDrive -ne $Cfg.LecteurReseau) { $s.HomeDrive = $Cfg.LecteurReseau; $s.HomeDirectory = $unc }   # Corrige le lecteur réseau et son chemin
-            if (-not $u.mail) { $s.EmailAddress = Get-UniqueMail $prenomN $nomN $u.SamAccountName }   # Génère un mail si le compte n'en a pas
-            $ouActuelle = $u.DistinguishedName -replace '^CN=(?:\\.|[^,\\])+,', ''   # Extrait l'OU actuelle en retirant "CN=..." du DN
-            $change = $false   # Indique si quelque chose a changé
-            if ($s.Count -gt 0) { Set-ADUser -Identity $u @s; $change = $true; Write-Log INFO "MODIFIE : $sam ($($s.Keys -join ', '))" }   # Applique les modifications d'attributs
-            if ($ouActuelle -ne $ouDn) { Move-ADObject -Identity $u.DistinguishedName -TargetPath $ouDn; $change = $true; Write-Log INFO "DEPLACE : $sam -> $ouDn" }   # Déplace le compte si le service a changé
-            if ($change) { $cpt.Modifie++ } else { $cpt.Inchange++ }   # Compte modifié ou inchangé
-        }   # Fin du if/else création-mise à jour
-
-        # Dossier personnel (cree une seule fois, droits : proprietaire + SYSTEM + Administrateurs)
-        if (-not (Test-Path $local)) {   # Si le dossier privé n'existe pas
-            New-Item -ItemType Directory -Path $local | Out-Null   # Création du dossier
-            Set-FolderAcl -Path $local -Compte $sam   # Droits : propriétaire (Modifier) + SYSTEM + admins
-            Write-Log INFO "Dossier cree : $local"   # Trace la création du dossier
-        }   # Fin du if dossier
-    } catch {   # En cas d'erreur sur cette ligne
-        $cpt.Erreur++   # Compte l'erreur
-        Write-Log ERREUR "$($row.nom) $($row.prenom) : $($_.Exception.Message)"   # Consigne le message d'erreur
-    }   # Fin du catch
+    # Crée le compte avec : nom affiché "prénom nom", login, UPN, OU du service,
+    # mail, mobile, mot de passe initial, compte actif et changement du mot de passe obligatoire à la 1ère connexion.
+    New-ADUser -Name "$prenom $nom" `
+               -SamAccountName $samAccountName `
+               -UserPrincipalName $userPrincipalName `
+               -Path $ouPath `
+               -EmailAddress $email `
+               -MobilePhone $telephone `
+               -AccountPassword $password `
+               -Enabled $true `
+               -ChangePasswordAtLogon $true
 }   # Fin de la boucle sur les lignes
-
-Write-Log INFO ("Termine - crees: {0}, modifies: {1}, inchanges: {2}, erreurs: {3}" -f $cpt.Cree, $cpt.Modifie, $cpt.Inchange, $cpt.Erreur)   # Bilan final dans le log
 ```
 
----
-
-## 3. Run-Auto.ps1 – exécution automatique si le CSV a changé
-
-```powershell
-<#
-.SYNOPSIS
-  Lance Sync-Utilisateurs.ps1 / Remove-Utilisateurs.ps1 uniquement si le CSV correspondant a change
-  depuis la derniere execution (comparaison d'empreinte SHA256). Appele par la tache planifiee.
-#>
-$dir   = $PSScriptRoot   # Dossier contenant les scripts
-$etat  = 'C:\Ecocert\Etat'   # Dossier où sont mémorisées les empreintes
-if (-not (Test-Path $etat)) { New-Item -ItemType Directory -Path $etat -Force | Out-Null }   # Crée ce dossier au besoin
-
-function Get-EtatCsv {   # Compare l'empreinte actuelle d'un CSV à la précédente
-    param([string]$Csv)   # Chemin du CSV
-    if (-not (Test-Path $Csv)) { return $null }   # CSV absent : rien à faire
-    $hash = (Get-FileHash -Path $Csv -Algorithm SHA256).Hash   # Empreinte SHA256 actuelle
-    $f = Join-Path $etat ((Split-Path $Csv -Leaf) + '.sha256')   # Fichier mémorisant l'ancienne empreinte
-    $ancien = if (Test-Path $f) { (Get-Content $f -Raw).Trim() } else { '' }   # Ancienne empreinte (vide si 1ère exécution)
-    [pscustomobject]@{ Hash = $hash; Fichier = $f; Change = ($hash -ne $ancien) }   # Retourne l'empreinte, le fichier d'état et l'indicateur de changement
-}   # Fin de Get-EtatCsv
-
-# 1) ajouts / modifications, 2) suppressions
-$jobs = @(   # Liste des tâches : CSV -> script associé
-    @{ Csv = (Join-Path $dir 'SP1utilisateursEcocert.csv');       Script = (Join-Path $dir 'Sync-Utilisateurs.ps1') },     # Mission 1 : créations / modifications
-    @{ Csv = (Join-Path $dir 'SP1anciensUtilisateursEcocert.csv'); Script = (Join-Path $dir 'Remove-Utilisateurs.ps1') }   # Mission 2 : suppressions
-)   # Fin de la liste
-
-foreach ($j in $jobs) {   # Parcourt les deux tâches dans l'ordre
-    $e = Get-EtatCsv $j.Csv   # Évalue l'état du CSV
-    if ($e -and $e.Change) {   # Si le CSV existe et a changé
-        & $j.Script -CsvPath $j.Csv   # Lance le script associé avec ce CSV
-        Set-Content -Path $e.Fichier -Value $e.Hash   # Mémorise la nouvelle empreinte
-    }   # Fin du if
-}   # Fin de la boucle
-```
-
----
-
-## 4. Install-TachePlanifiee.ps1 – installation de la tâche planifiée
-
-```powershell
-<#
-.SYNOPSIS
-  Cree (ou remplace) la tache planifiee "Ecocert - Synchronisation AD".
-  A lancer une seule fois, en administrateur, depuis le dossier des scripts.
-#>
-$nom    = 'Ecocert - Synchronisation AD'   # Nom de la tâche planifiée
-$script = Join-Path $PSScriptRoot 'Run-Auto.ps1'   # Script qu'elle exécutera
-
-$action    = New-ScheduledTaskAction -Execute 'powershell.exe' `   # Action : lancer PowerShell
-             -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$script`"" -WorkingDirectory $PSScriptRoot   # Sans profil, politique d'exécution contournée, dossier de travail = scripts
-$declencheur = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(1) `   # Déclencheur : démarre dans 1 minute
-             -RepetitionInterval (New-TimeSpan -Minutes 5) -RepetitionDuration (New-TimeSpan -Days 3650)   # Se répète toutes les 5 minutes pendant ~10 ans
-$compte    = New-ScheduledTaskPrincipal -UserId 'SYSTEM' -LogonType ServiceAccount -RunLevel Highest   # Exécution en SYSTEM avec les privilèges maximum
-$options   = New-ScheduledTaskSettingsSet -MultipleInstances IgnoreNew -ExecutionTimeLimit (New-TimeSpan -Hours 1)   # Pas d'instances parallèles, arrêt après 1 h
-
-Register-ScheduledTask -TaskName $nom -Action $action -Trigger $declencheur -Principal $compte -Settings $options -Force | Out-Null   # Crée ou remplace la tâche
-Write-Host "Tache '$nom' installee : verification des CSV toutes les 5 minutes."   # Message de confirmation
-
-# dans le cas ou je veux supprimer la tâche
-# Unregister-ScheduledTask -TaskName "Ecocert - Synchronisation AD" -Confirm:$false   # Commande de désinstallation de la tâche
-```
+La suite du fichier (« 2. SUPPRESSION DES ANCIENS UTILISATEURS ») est décrite dans la Mission 2.
 
 ---
 
 > ## 📋 Résumé du fonctionnement – Mission 1
 >
-> **Objectif :** créer ou mettre à jour automatiquement les comptes AD à partir du fichier `SP1utilisateursEcocert.csv`.
+> **Objectif :** créer les comptes AD à partir du fichier `SP1utilisateursEcocert.csv`.
 >
 > **Déroulement :**
-> 1. `Install-TachePlanifiee.ps1` (à lancer une seule fois) crée une tâche qui exécute `Run-Auto.ps1` toutes les 5 minutes en SYSTEM.
-> 2. `Run-Auto.ps1` calcule l'empreinte SHA256 du CSV. Si elle diffère de la précédente, il lance `Sync-Utilisateurs.ps1`, puis mémorise la nouvelle empreinte.
-> 3. `Sync-Utilisateurs.ps1` charge `Common.ps1`, lit le CSV, puis pour chaque ligne :
->    - normalise nom et prénom (sans accents, minuscules) et construit le login `prenom.nom` (20 caractères max) ;
->    - convertit le mobile au format `33 x xx xx xx xx` ;
->    - crée l'OU du service si elle n'existe pas (`/` = OU imbriquée) ;
->    - **crée** le compte s'il n'existe pas (mail unique `p.nom@…`, mot de passe initial à changer à la 1ère connexion, lecteur `P:`) ;
->    - **sinon le met à jour** (mobile, fonction, bureau, lecteur réseau, OU) uniquement si une valeur a changé ;
->    - crée le dossier privé `nom.prenom` avec droits NTFS restreints (propriétaire + administrateurs).
-> 4. Tout est journalisé dans `C:\Ecocert\Logs\ecocert_AAAA-MM.log`, avec un bilan final (créés / modifiés / inchangés / erreurs).
+> 1. Le script `Gestion-Utilisateurs.ps1` est lancé à la main, en administrateur, depuis le dossier contenant les CSV.
+> 2. Il charge le module `ActiveDirectory`, puis lit `SP1utilisateursEcocert.csv`.
+> 3. Pour chaque ligne du CSV :
+>    - nettoie nom, prénom et service (`Trim`) ;
+>    - construit le login `prenom.nom` en minuscules, l'UPN `login@local.ecocert1.lan` et le mail `p.nom@local.ecocert1.lan` ;
+>    - convertit le mobile au format `+33 x xx xx xx xx` (exemple : `06 65 43 65 78` devient `+33 6 65 43 65 78`) ; si le numéro est vide ou égal à `NaN`, aucun mobile n'est renseigné ;
+>    - place le compte dans l'OU portant le nom du service ;
+>    - **crée** le compte (nom affiché `prénom nom`) avec le mot de passe initial, compte actif, changement du mot de passe obligatoire à la 1ère connexion.
 >
-> **Points clés :** script idempotent (relançable sans risque), simulation possible avec `-WhatIf`, une erreur sur une ligne n'arrête pas le traitement des suivantes.
+> **Points clés :** script court et lisible, tenant en un seul fichier.
+>
+> **Limites à connaître :**
+> - les OU des services doivent exister avant l'exécution ;
+> - relancé une seconde fois, le script affiche une erreur « compte déjà existant » pour chaque utilisateur ;
+> - le CSV doit être séparé par des virgules et les numéros de mobile doivent être des numéros français à 10 chiffres ;
+> - une erreur sur une ligne affiche un message en rouge, puis le script passe à la ligne suivante.
