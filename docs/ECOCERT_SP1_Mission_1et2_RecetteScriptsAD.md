@@ -4,7 +4,7 @@
 
 ---
 
-### 1. Les utilisateurs sont créer et placer dans leur dossier respectifs par rapport à leur rôle.
+### 1. Les utilisateurs sont créés et placés dans l'OU de leur service.
 
 **Vérification sur l'AD :** `Gestionnaire de serveur > Outils > Utilisateurs et ordinateurs Active Directory`
 
@@ -21,13 +21,11 @@ En cas d'échec, proposer une hypothèse expliquant le dysfonctionnement.
 
 ---
 
-### 2. Dossiers dans C:\ créer.
+### 2. Les comptes ont le login, l'adresse mail et le mobile attendus.
 
-**Vérification sur l'AD :** `Chemin d'accès: C:\Anciens Collaborateurs`
+**Commande utilisée :** `Get-ADUser -Identity nadia.jara -Properties EmailAddress, MobilePhone`
 
-`C:\Données` 
-
-`C:\Ecocert`
+**Remarque :** résultat attendu : login `nadia.jara`, mail `n.jara@local.ecocert1.lan`, mobile au format `+33 x xx xx xx xx`.
 
 - [X] Réussite
 - [ ] Échec
@@ -42,9 +40,30 @@ En cas d'échec, proposer une hypothèse expliquant le dysfonctionnement.
 
 ---
 
-### 3. Répertoire des utilisateurs supprimer disponible dans le dossier "Anciens collaborateurs".
+### 3. Le mot de passe doit être changé à la première connexion.
 
-**Commande utilisée :** `cd C:\Anciens Collaborateurs` `dir`
+**Vérification sur l'AD :** `Utilisateurs et ordinateurs Active Directory > Propriétés de l'utilisateur > onglet Compte`
+
+**Remarque :** la case « L'utilisateur doit changer le mot de passe à la prochaine ouverture de session » doit être cochée.
+
+- [X] Réussite
+- [ ] Échec
+
+En cas d'échec, proposer une hypothèse expliquant le dysfonctionnement.
+
+................................................................................................................................................................
+
+................................................................................................................................................................................
+
+................................................................................................................................................................
+
+---
+
+### 4. Les utilisateurs supprimés n'existent plus dans l'AD.
+
+**Commande utilisée :** `Get-ADUser -Identity serre.rayan`
+
+**Remarque :** le résultat attendu est une erreur « objet introuvable ». Pour une ligne mal formée du CSV (ex. `TERRA Idriss,Yves`), le login reconstitué n'existe pas : une erreur s'affiche et le compte reste dans l'AD.
 
 - [X] Réussite
 - [ ] Échec
@@ -58,44 +77,3 @@ En cas d'échec, proposer une hypothèse expliquant le dysfonctionnement.
 ................................................................................................................................................................
 
 ---
-
-### 4. Répertoire des utilisateurs disponible dans le dossier "Données".
-
-**Commande utilisée :** `cd C:\Données` `dir`
-
-- [X] Réussite
-- [ ] Échec
-
-En cas d'échec, proposer une hypothèse expliquant le dysfonctionnement.
-
-................................................................................................................................................................
-
-................................................................................................................................................................
-
-................................................................................................................................................................
-
----
-
-### 5. Les dossiers "Logs" et "Etat" qui contient les Hash des .csv sont disponible dans le dossier "Ecocert".
-
-**Commande utilisée :** `cd C:\Ecocert` `dir` 
-
-`cd Logs` `dir` 
-
-`cd ..\Etat` `dir`
-
-**Remarque :** Vous pouvez utiliser la commande `type` pour afficher le contenu d'un fichier.
-
-- [X] Réussite
-- [ ] Échec
-
-En cas d'échec, proposer une hypothèse expliquant le dysfonctionnement.
-
-................................................................................................................................................................
-
-................................................................................................................................................................
-
-................................................................................................................................................................
-
----
-
