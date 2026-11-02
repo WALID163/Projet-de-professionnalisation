@@ -17,8 +17,8 @@ nav:
         - 01 Mission 3 Mise en place du serveur GLPI et NAS: ECOCERT_SP0_Mission_3_ServeursGLPIetNAS.md
         - 02 Mission 3 Recette du serveur GLPI et NAS: ECOCERT_SP0_Mission_3_RecetteGLPIetNAS.md
       -Mission 4 Mise en place d'une partie de l'architecture réseau:
-        - 01 Mission 4 Mise en place d'une partie de l'architecture réseau: ECOCERT_SP0_Mission_4_Mise_en_place_d’une_partie_de_l’architecture_réseau.md
-        - 02 Mission 4 Mise en place d'une partie de l'architecture réseau:
+        - 01 Mission 4 Mise en place d'une partie de l'architecture réseau: ECOCERT_SP0_Mission_4_Mise_en_place_d_une_partie_de_l_architecture_reseau.md
+        - 02 Mission 4 Mise en place d'une partie de l'architecture réseau: ECOCERT_SP0_Mission_4_Mise_en_place_d_une_partie_de_l_architecture_reseau_recette.md
     - SP1 Ecocert automatiser la gestion des utilisateurs:
       - Mission 1 La création / modification des comptes utilisateurs en suivant la norme interne à ECOCERT:
         - 01 Mission 1 La création / modification des comptes utilisateurs: ECOCERT_SP1_Mission_1_Creation_Modification.md
