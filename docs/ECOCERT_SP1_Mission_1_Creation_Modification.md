@@ -9,8 +9,8 @@
 ## Norme interne ECOCERT appliquée
 
 - Login : `prenom.nom` en minuscules (sAMAccountName **et** UPN)
-- UPN : `prenom.nom@local.ecocert1.lan`
-- Mail : `p.nom@local.ecocert1.lan` (initiale du prénom + nom)
+- UPN : `prenom.nom@local.ecocert2.lan`
+- Mail : `p.nom@local.ecocert2.lan` (initiale du prénom + nom)
 - OU = nom du service (l'OU doit déjà exister dans l'annuaire)
 - Mobile au format `+33 x xx xx xx xx`
 - Mot de passe initial identique pour tous, à changer à la 1ère connexion
@@ -36,8 +36,8 @@ foreach ($ligne in $utilisateurs) {   # Traite chaque ligne du CSV
     $telMobileBrut = $ligne.telMobile   # Numéro de mobile tel que saisi dans le CSV
     
     $samAccountName = "$prenom.$nom".ToLower()   # Login prenom.nom en minuscules
-    $userPrincipalName = "$samAccountName@local.ecocert1.lan"   # UPN = login@domaine
-    $email = "$($prenom.Substring(0,1)).$nom".ToLower() + "@local.ecocert1.lan"   # Mail : initiale du prénom + nom + domaine
+    $userPrincipalName = "$samAccountName@local.ecocert2.lan"   # UPN = login@domaine
+    $email = "$($prenom.Substring(0,1)).$nom".ToLower() + "@local.ecocert2.lan"   # Mail : initiale du prénom + nom + domaine
     
     $telephone = $null   # Téléphone vide par défaut
     if (-not [string]::IsNullOrEmpty($telMobileBrut) -and $telMobileBrut -ne "NaN") {   # Si un numéro est renseigné (ni vide, ni "NaN")
