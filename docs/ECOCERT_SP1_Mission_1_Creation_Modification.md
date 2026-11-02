@@ -78,7 +78,7 @@ La suite du fichier (« 2. SUPPRESSION DES ANCIENS UTILISATEURS ») est décrite
 > 2. Il charge le module `ActiveDirectory`, puis lit `SP1utilisateursEcocert.csv`.
 > 3. Pour chaque ligne du CSV :
 >    - nettoie nom, prénom et service (`Trim`) ;
->    - construit le login `prenom.nom` en minuscules, l'UPN `login@local.ecocert1.lan` et le mail `p.nom@local.ecocert1.lan` ;
+>    - construit le login `prenom.nom` en minuscules, l'UPN `login@local.ecocert2.lan` et le mail `p.nom@local.ecocert2.lan` ;
 >    - convertit le mobile au format `+33 x xx xx xx xx` (exemple : `06 65 43 65 78` devient `+33 6 65 43 65 78`) ; si le numéro est vide ou égal à `NaN`, aucun mobile n'est renseigné ;
 >    - place le compte dans l'OU portant le nom du service ;
 >    - **crée** le compte (nom affiché `prénom nom`) avec le mot de passe initial, compte actif, changement du mot de passe obligatoire à la 1ère connexion.
