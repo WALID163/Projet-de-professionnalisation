@@ -43,6 +43,9 @@ nav:
           - BLOC 2 Activité 1 Configuration DNS Esclave: CUB-BLOC2-Activité1-ExploitServ-DNSAEsclaveConf.md
           - BLOC 2 Activité 1 Configuration DNS Délégation: CUB-BLOC2-Activité1-ExploitServ-DélégationDNS.md
           - BLOC 2 Activité 1 Fiche recette DNS: CUB-BLOC2-Activité1-ExploitServ-RecetteDNS.md
+      - Activité 2 ExploitServ:
+        - BLOC 2 Activité 2 Mise en place d’un service Web au sein d’une agence de l’entreprise CUB:
+          - BLOC 2 Activité 2 Configuration serveur WEB: CUB-BLOC2-Activité2-ExploitServ-ServWebConf.md
     - BLOC 3:
       - Situation 1 Cybersécurité:
         - BLOC 3 Situation 1 Cybersécurité: CUB-BLOC3-Situation1-Cybersécurité.md
