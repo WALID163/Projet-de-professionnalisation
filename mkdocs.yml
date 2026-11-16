@@ -26,6 +26,10 @@ nav:
         - 01 Mission 1 La suppression des comptes des utilisateurs: ECOCERT_SP1_Mission_2_Suppression.md
       - Mission 1&2 Recette pour les Scripts de l'AD: ECOCERT_SP1_Mission_1et2_RecetteScriptsAD.md
       - Mission 1&2 Resultat des Scripts de l'AD: ECOCERT_SP1_Mission_1et2_ResultatScriptsAD.md
+    - SP3 Ecocert automatiser la gestion des configurations de postes de travail:
+     - Mission 1 Installation d'Ansible:
+     - Mission 2 Création des playbooks:
+     - Mission 3 Fiche recette:
 
   - CUB:
     - Accueil : aproposCUB.md
