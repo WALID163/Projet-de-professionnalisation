@@ -50,6 +50,9 @@ nav:
       - Activité 2 ExploitServ:
         - BLOC 2 Activité 2 Mise en place d’un service Web au sein d’une agence de l’entreprise CUB:
           - BLOC 2 Activité 2 Configuration serveur WEB: CUB-BLOC2-Activité2-ExploitServ-ServWebConf.md
+      - Activité 3 ExploitServ:
+        - BLOC 2 Activité 3 Constatation des limites du protocole HTTP et migration vers le protocole HTTPS:
+          - BLOC 2 Activité 3 Mise en place du port mirroring: CUB-BLOC2-Activité3-ExploitServ-PortMirroring.md
     - BLOC 3:
       - Situation 1 Cybersécurité:
         - BLOC 3 Situation 1 Cybersécurité: CUB-BLOC3-Situation1-Cybersécurité.md
