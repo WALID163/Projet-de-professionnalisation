@@ -1,0 +1,5353 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../ECOCERT_SP3_Mission%20_1_automatiser_la_gestion_des_configurations_de_postes_de_travail/">
+      
+      
+        <link rel="next" href="../ECOCERT_SP3_Mission%20_1_automatiser_la_gestion_des_configurations_de_postes_de_travail/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>Mission 2 Création des playbooks - Mille Nuits | CUB | ECOCERT</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mission-1-installation-et-configuration-dun-serveur-de-gestion-de-configurations-centralisees" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Mille Nuits | CUB | ECOCERT" class="md-header__button md-logo" aria-label="Mille Nuits | CUB | ECOCERT" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mille Nuits | CUB | ECOCERT
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Mission 2 Création des playbooks
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Mille Nuits | CUB | ECOCERT" class="md-nav__button md-logo" aria-label="Mille Nuits | CUB | ECOCERT" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Mille Nuits | CUB | ECOCERT
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ECOCERT
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ECOCERT
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aproposECOCERT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SP0 Ecocert
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SP0 Ecocert
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 1 Adapter le plan d'adressage aux nouveaux besoins
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mission 1 Adapter le plan d'adressage aux nouveaux besoins
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ECOCERT_SP0_Mission_1_Adapter_le_plan_d_adressage_aux_nouveaux_besoins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Mission 1 Maquettage infrastructure reseau
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 2 Mise en place dans un environnement virtuel d'un contrôleur de domaine et d'un service DHCP
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mission 2 Mise en place dans un environnement virtuel d'un contrôleur de domaine et d'un service DHCP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ECOCERT_SP0_Mission_2_Controleur_de_domaine_et_DHCP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Mission 2 Mise en place du Windows Server et de Keadhcp
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ECOCERT_SP0_Mission_2_Recette_AD_et_DHCP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 Mission 2 Recette Windows Server et de Keadhcp
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_3" id="__nav_2_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 3 Mise en place d’un serveur de gestion d’incidents et d’un serveur NAS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mission 3 Mise en place d’un serveur de gestion d’incidents et d’un serveur NAS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ECOCERT_SP0_Mission_3_ServeursGLPIetNAS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Mission 3 Mise en place du serveur GLPI et NAS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ECOCERT_SP0_Mission_3_RecetteGLPIetNAS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 Mission 3 Recette du serveur GLPI et NAS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_4" id="__nav_2_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 4 Mise en place d'une partie de l'architecture réseau
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mission 4 Mise en place d'une partie de l'architecture réseau
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ECOCERT_SP0_Mission_4_Mise_en_place_d_une_partie_de_l_architecture_reseau/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Mission 4 Mise en place d'une partie de l'architecture réseau
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ECOCERT_SP0_Mission_4_Mise_en_place_d_une_partie_de_l_architecture_reseau_recette/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 Mission 4 Mise en place d'une partie de l'architecture réseau
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SP1 Ecocert automatiser la gestion des utilisateurs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SP1 Ecocert automatiser la gestion des utilisateurs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1" id="__nav_2_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 1 La création / modification des comptes utilisateurs en suivant la norme interne à ECOCERT
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mission 1 La création / modification des comptes utilisateurs en suivant la norme interne à ECOCERT
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ECOCERT_SP1_Mission_1_Creation_Modification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Mission 1 La création / modification des comptes utilisateurs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_2" id="__nav_2_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 2 La suppression des comptes des utilisateurs ayant quitté ECOCERT
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mission 2 La suppression des comptes des utilisateurs ayant quitté ECOCERT
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ECOCERT_SP1_Mission_2_Suppression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Mission 1 La suppression des comptes des utilisateurs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ECOCERT_SP1_Mission_1et2_RecetteScriptsAD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 1&2 Recette pour les Scripts de l'AD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ECOCERT_SP1_Mission_1et2_ResultatScriptsAD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 1&2 Resultat des Scripts de l'AD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SP3 Ecocert automatiser la gestion des configurations de postes de travail
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SP3 Ecocert automatiser la gestion des configurations de postes de travail
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ECOCERT_SP3_Mission%20_1_automatiser_la_gestion_des_configurations_de_postes_de_travail/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 1 Installation d'Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 2 Création des playbooks
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 2 Création des playbooks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#playbooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PLAYBOOKS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playbook-1-1-sshyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playbook 1 : 1-ssh.yml
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Playbook 1 : 1-ssh.yml">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explication-ligne-par-ligne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explication ligne par ligne
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-tete-du-play" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        En-tête du play
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-1-verifications-prealables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 1 : vérifications préalables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-2-installer-la-cle-publique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 2 : installer la clé publique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-3-activer-lauthentification-par-cle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 3 : activer l'authentification par clé
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-4-valider-la-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 4 : valider la configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-5-tester-une-connexion-par-cle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 5 : tester une connexion par clé
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-6-desactiver-les-mots-de-passe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 6 : désactiver les mots de passe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handlers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Handlers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#points-dattention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Points d'attention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Utilisation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playbook-2-2-installation-applicationyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playbook 2 : 2-Installation-application.yml
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Playbook 2 : 2-Installation-application.yml">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explication-ligne-par-ligne_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explication ligne par ligne
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-tete-du-play_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        En-tête du play
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-1-verifier-le-nom-du-paquet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 1 : vérifier le nom du paquet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-2-actualiser-les-depots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 2 : actualiser les dépôts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-3-installer-lapplication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 3 : installer l'application
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-4-demarrer-et-activer-le-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 4 : démarrer et activer le service
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilisation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Utilisation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remarques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remarques
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playbook-3-3-mise-a-jouryml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playbook 3 : 3-Mise-a-jour.yml
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Playbook 3 : 3-Mise-a-jour.yml">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explication-ligne-par-ligne_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explication ligne par ligne
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-tete-du-play_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        En-tête du play
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-1-actualiser-les-depots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 1 : actualiser les dépôts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-2-installer-les-mises-a-jour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 2 : installer les mises à jour
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-3-verifier-si-un-redemarrage-est-necessaire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 3 : vérifier si un redémarrage est nécessaire
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-4-signaler-le-besoin-de-redemarrage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 4 : signaler le besoin de redémarrage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-5-redemarrer-si-demande" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 5 : redémarrer si demandé
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilisation_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Utilisation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remarques_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remarques
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playbook-4-4-politique-de-securite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playbook 4 : 4-politique-de-securite
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Playbook 4 : 4-politique-de-securite">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explication-ligne-par-ligne_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explication ligne par ligne
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-tete-du-playbook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        En-tête du playbook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-1-installation-des-paquets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 1 : installation des paquets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-2-verifier-la-presence-du-profil-pam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 2 : vérifier la présence du profil PAM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-3-assertion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 3 : assertion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-4-verifier-si-pwquality-est-deja-actif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 4 : vérifier si pwquality est déjà actif
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-5-activer-le-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 5 : activer le module
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-6-creer-le-dossier-de-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 6 : créer le dossier de configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-7-appliquer-la-politique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 7 : appliquer la politique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-8-verification-finale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 8 : vérification finale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-9-message-de-fin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 9 : message de fin
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remarques_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remarques
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ECOCERT_SP3_Mission%20_1_automatiser_la_gestion_des_configurations_de_postes_de_travail/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 1 Installation d'Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CUB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CUB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aproposCUB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLOC 2
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BLOC 2
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Situation 1 AdminSys
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Situation 1 AdminSys
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUB-BLOC2-Situation1-ServWindowsCore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLOC 2 Situation 1 Préparation de la maquette et premiers paramétrages du serveur Windows2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_2" id="__nav_3_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Situation 2 AdminSys
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Situation 2 AdminSys
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUB-BLOC2-Situation2-ServWindowsWAC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLOC 2 Situation 2 Installation d-un centre d-administration des serveurs windows WAC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_3" id="__nav_3_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Situation 3 AdminSys
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Situation 3 AdminSys
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUB-BLOC2-Situation3-VersionningGit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLOC 2 Situation 3 Initiation à Powershell et mise en place d-un environnement de gestion des versions Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_4" id="__nav_3_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Activité 1 ExploitServ
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Activité 1 ExploitServ
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_4_1" id="__nav_3_2_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLOC 2 Activité 1 Mise en place de serveur DNS au sein de l-entreprise CUB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_2_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BLOC 2 Activité 1 Mise en place de serveur DNS au sein de l-entreprise CUB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUB-BLOC2-Activit%C3%A91-ExploitServ-DNSRConf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLOC 2 Activité 1 Configuration DNS récursif
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUB-BLOC2-Activit%C3%A91-ExploitServ-DNSAConf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLOC 2 Activité 1 Configuration DNS Maitre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUB-BLOC2-Activit%C3%A91-ExploitServ-DNSAEsclaveConf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLOC 2 Activité 1 Configuration DNS Esclave
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUB-BLOC2-Activit%C3%A91-ExploitServ-D%C3%A9l%C3%A9gationDNS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLOC 2 Activité 1 Configuration DNS Délégation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUB-BLOC2-Activit%C3%A91-ExploitServ-RecetteDNS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLOC 2 Activité 1 Fiche recette DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_5" id="__nav_3_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Activité 2 ExploitServ
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Activité 2 ExploitServ
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_5_1" id="__nav_3_2_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLOC 2 Activité 2 Mise en place d’un service Web au sein d’une agence de l’entreprise CUB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_2_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BLOC 2 Activité 2 Mise en place d’un service Web au sein d’une agence de l’entreprise CUB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUB-BLOC2-Activit%C3%A92-ExploitServ-ServWebConf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLOC 2 Activité 2 Configuration serveur WEB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_6" id="__nav_3_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Activité 3 ExploitServ
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Activité 3 ExploitServ
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_6_1" id="__nav_3_2_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLOC 2 Activité 3 Constatation des limites du protocole HTTP et migration vers le protocole HTTPS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_2_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BLOC 2 Activité 3 Constatation des limites du protocole HTTP et migration vers le protocole HTTPS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUB-BLOC2-Activit%C3%A93-ExploitServ-PortMirroring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLOC 2 Activité 3 Mise en place du port mirroring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLOC 3
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BLOC 3
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_1" id="__nav_3_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Situation 1 Cybersécurité
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Situation 1 Cybersécurité
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUB-BLOC3-Situation1-Cybers%C3%A9curit%C3%A9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLOC 3 Situation 1 Cybersécurité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_2" id="__nav_3_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Situation 3 Cybersécurité
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Situation 3 Cybersécurité
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUB-BLOC3-Cybers%C3%A9curit%C3%A9-Situation3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLOC 3 Situation 3 Cybersécurité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUB-BLOC3-Recette-Situation3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLOC 3 Situation 3 Cybersécurité recette
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Millenuits
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Millenuits
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aproposMilleNuits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SP1 Gestion de l’infrastructure réseau
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SP1 Gestion de l’infrastructure réseau
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_1" id="__nav_4_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 1 Définir un nouveau plan d’adressage
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mission 1 Définir un nouveau plan d’adressage
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mission%201%20sp1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Mission 1 Maquettage infrastructure reseau
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mission%201.1%20sp1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 Mission 1 Fiche recette maquette infrastructure reseau
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_2" id="__nav_4_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 2 Mise en place de l’infrastructure réseau
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mission 2 Mise en place de l’infrastructure réseau
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mission%202%20sp1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Mission 2 Infrastructure reseau commandes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_3" id="__nav_4_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 3 Mise en place d’accès Wifi
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mission 3 Mise en place d’accès Wifi
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mission%203%20sp1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Mission 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SP2 Gestion du parc informatique
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SP2 Gestion du parc informatique
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3_1" id="__nav_4_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 1 Création d’une documentation avec MkDocs et GitHub Pages
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mission 1 Création d’une documentation avec MkDocs et GitHub Pages
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mission%201%20sp2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Mission 1 Création d’une documentation avec MkDocs et GitHub Pages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3_2" id="__nav_4_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 2 Installation nouveaux postes clients
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mission 2 Installation nouveaux postes clients
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mission%202%20sp2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Mission 2 Installation postes clients
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mission%202.1%20sp2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 Mission 2 Fiche recette postes clients
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3_3" id="__nav_4_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 3 Recherche et mise en place d'un outil de déploiement des postes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mission 3 Recherche et mise en place d'un outil de déploiement des postes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mission%203%20sp2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Mission 3 Outil deploiement OS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SP3 Gestion des services principaux AD - DHCP
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SP3 Gestion des services principaux AD - DHCP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4_1" id="__nav_4_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 1 Mise en place du serveur Windows Server 2019
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mission 1 Mise en place du serveur Windows Server 2019
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mission%201%20sp3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Mission 1 Configuration Windows Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mission%201.1%20sp3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 Mission 1 Fiche recette Windows Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mission%201.2%20sp3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 Mission 1 Fiche recette maquette DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4_2" id="__nav_4_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 2 Mise en place du serveur DHCP sous Linux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mission 2 Mise en place du serveur DHCP sous Linux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mission%202%20sp3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Mission 2 Mise en place du serveur DHCP sous Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SP4 Mise en place d’un espace de développement
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SP4 Mise en place d’un espace de développement
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5_1" id="__nav_4_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 1 Mise en place d’un environnement de test conteneurisé dans une DMZ interne avec Docker et préparation d’une formation développeurs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mission 1 Mise en place d’un environnement de test conteneurisé dans une DMZ interne avec Docker et préparation d’une formation développeurs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mission%201%20sp4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Mission 1 Mise en place d’un environnement de test conteneurisé
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mission%201.1%20sp4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 Mission 1 Fiche recette d'un environnement de test conteneurisé
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5_2" id="__nav_4_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mission 2 Création d’un sous-réseau développeurs avec accès Wi-Fi sécurisé et mise en place d’un portail captif (optionnel, simplement pour les plus avancés)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mission 2 Création d’un sous-réseau développeurs avec accès Wi-Fi sécurisé et mise en place d’un portail captif (optionnel, simplement pour les plus avancés)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mission%202%20sp4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Mission 2 Création d’un sous-réseau développeurs avec accès Wi-Fi sécurisé
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#playbooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PLAYBOOKS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playbook-1-1-sshyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playbook 1 : 1-ssh.yml
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Playbook 1 : 1-ssh.yml">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explication-ligne-par-ligne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explication ligne par ligne
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-tete-du-play" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        En-tête du play
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-1-verifications-prealables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 1 : vérifications préalables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-2-installer-la-cle-publique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 2 : installer la clé publique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-3-activer-lauthentification-par-cle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 3 : activer l'authentification par clé
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-4-valider-la-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 4 : valider la configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-5-tester-une-connexion-par-cle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 5 : tester une connexion par clé
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-6-desactiver-les-mots-de-passe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 6 : désactiver les mots de passe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handlers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Handlers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#points-dattention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Points d'attention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Utilisation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playbook-2-2-installation-applicationyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playbook 2 : 2-Installation-application.yml
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Playbook 2 : 2-Installation-application.yml">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explication-ligne-par-ligne_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explication ligne par ligne
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-tete-du-play_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        En-tête du play
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-1-verifier-le-nom-du-paquet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 1 : vérifier le nom du paquet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-2-actualiser-les-depots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 2 : actualiser les dépôts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-3-installer-lapplication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 3 : installer l'application
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-4-demarrer-et-activer-le-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 4 : démarrer et activer le service
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilisation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Utilisation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remarques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remarques
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playbook-3-3-mise-a-jouryml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playbook 3 : 3-Mise-a-jour.yml
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Playbook 3 : 3-Mise-a-jour.yml">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explication-ligne-par-ligne_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explication ligne par ligne
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-tete-du-play_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        En-tête du play
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-1-actualiser-les-depots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 1 : actualiser les dépôts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-2-installer-les-mises-a-jour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 2 : installer les mises à jour
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-3-verifier-si-un-redemarrage-est-necessaire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 3 : vérifier si un redémarrage est nécessaire
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-4-signaler-le-besoin-de-redemarrage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 4 : signaler le besoin de redémarrage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-5-redemarrer-si-demande" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 5 : redémarrer si demandé
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilisation_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Utilisation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remarques_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remarques
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playbook-4-4-politique-de-securite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playbook 4 : 4-politique-de-securite
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Playbook 4 : 4-politique-de-securite">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explication-ligne-par-ligne_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explication ligne par ligne
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-tete-du-playbook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        En-tête du playbook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-1-installation-des-paquets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 1 : installation des paquets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-2-verifier-la-presence-du-profil-pam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 2 : vérifier la présence du profil PAM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-3-assertion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 3 : assertion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-4-verifier-si-pwquality-est-deja-actif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 4 : vérifier si pwquality est déjà actif
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-5-activer-le-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 5 : activer le module
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-6-creer-le-dossier-de-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 6 : créer le dossier de configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-7-appliquer-la-politique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 7 : appliquer la politique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-8-verification-finale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 8 : vérification finale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tache-9-message-de-fin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tâche 9 : message de fin
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remarques_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remarques
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="mission-1-installation-et-configuration-dun-serveur-de-gestion-de-configurations-centralisees">Mission 1 : Installation et configuration d'un serveur de gestion de configurations centralisées</h1>
+<h2 id="playbooks">PLAYBOOKS</h2>
+<hr />
+<h2 id="playbook-1-1-sshyml">Playbook 1 : <code>1-ssh.yml</code></h2>
+<h3 id="explication-ligne-par-ligne">Explication ligne par ligne</h3>
+<p>Ce playbook sécurise SSH en trois temps : déployer la clé publique, vérifier qu'elle fonctionne, puis seulement après désactiver les mots de passe. Cet ordre évite de se verrouiller hors du serveur.</p>
+<h3 id="en-tete-du-play">En-tête du play</h3>
+<pre><code class="language-yaml">---
+- name: Securisation SSH des serveurs
+  hosts: serveurs
+  become: true
+  serial: 1
+</code></pre>
+<ul>
+<li><code>hosts: serveurs</code> : groupe ciblé dans l'inventaire.</li>
+<li><code>become: true</code> : élévation de privilèges (sudo), nécessaire pour écrire dans <code>/etc/ssh</code>.</li>
+<li><code>serial: 1</code> : un serveur à la fois. Si la configuration SSH casse l'accès sur un serveur, le play s'arrête et les autres restent intacts. C'est une protection importante pour ce type de modification.</li>
+</ul>
+<pre><code class="language-yaml">  vars:
+    ssh_public_key_file: &quot;{{ lookup('env', 'HOME') }}/.ssh/id_ed25519.pub&quot;
+    ssh_private_key_file: &quot;{{ lookup('env', 'HOME') }}/.ssh/id_ed25519&quot;
+</code></pre>
+<p>Deux variables contenant le chemin de la paire de clés. <code>lookup('env', 'HOME')</code> lit la variable d'environnement <code>HOME</code> sur la machine de contrôle (celle qui lance Ansible), donc <code>/home/etudiant</code>. <code>id_ed25519</code> est une clé de type Ed25519 (moderne et recommandée).</p>
+<h3 id="tache-1-verifications-prealables">Tâche 1 : vérifications préalables</h3>
+<pre><code class="language-yaml">    - name: Verifier que les informations SSH sont disponibles
+      ansible.builtin.assert:
+        that:
+          - ansible_user is defined
+          - ssh_public_key_file is file
+          - ssh_private_key_file is file
+        fail_msg: &quot;Utilisateur SSH ou paire de cles introuvable.&quot;
+</code></pre>
+<p>Le play s'arrête si une condition est fausse :</p>
+<ul>
+<li><code>ansible_user is defined</code> : un utilisateur de connexion est bien défini dans l'inventaire.</li>
+<li><code>ssh_public_key_file is file</code> : le test Jinja <code>file</code> vérifie que le fichier de clé publique existe (côté machine de contrôle).</li>
+<li><code>ssh_private_key_file is file</code> : idem pour la clé privée.</li>
+</ul>
+<h3 id="tache-2-installer-la-cle-publique">Tâche 2 : installer la clé publique</h3>
+<pre><code class="language-yaml">    - name: Installer la cle publique sur le serveur
+      ansible.posix.authorized_key:
+        user: &quot;{{ ansible_user }}&quot;
+        key: &quot;{{ lookup('file', ssh_public_key_file) }}&quot;
+        state: present
+</code></pre>
+<p>Le module <code>authorized_key</code> (collection <code>ansible.posix</code>) ajoute la clé dans <code>~/.ssh/authorized_keys</code> de l'utilisateur.</p>
+<ul>
+<li><code>user</code> : le compte qui recevra la clé.</li>
+<li><code>key</code> : <code>lookup('file', ...)</code> lit le contenu du fichier <code>.pub</code> sur la machine de contrôle.</li>
+<li><code>state: present</code> : ajoute la clé si elle est absente (idempotent, pas de doublon).</li>
+</ul>
+<h3 id="tache-3-activer-lauthentification-par-cle">Tâche 3 : activer l'authentification par clé</h3>
+<pre><code class="language-yaml">    - name: Activer l'authentification par cle publique
+      ansible.builtin.copy:
+        dest: /etc/ssh/sshd_config.d/00-ansible.conf
+        owner: root
+        group: root
+        mode: '0644'
+        content: |
+          PubkeyAuthentication yes
+      notify: Reload SSH
+</code></pre>
+<p>Crée un petit fichier de configuration dans <code>sshd_config.d/</code> (chargé par <code>Include</code> dans <code>sshd_config</code> sur Debian récent). Il contient une seule directive : <code>PubkeyAuthentication yes</code>.</p>
+<p><code>notify: Reload SSH</code> déclenche le handler défini en bas, mais seulement si le fichier a été modifié. Précision importante : un handler s'exécute à la fin du play (sur chaque hôte), pas immédiatement.</p>
+<h3 id="tache-4-valider-la-configuration">Tâche 4 : valider la configuration</h3>
+<pre><code class="language-yaml">    - name: Verifier la configuration SSH
+      ansible.builtin.command: sshd -t
+      changed_when: false
+</code></pre>
+<p><code>sshd -t</code> teste la syntaxe de la configuration sans rien appliquer. S'il y a une erreur, la commande retourne un code non nul, la tâche échoue et le play s'arrête avant que le handler ne recharge SSH avec une configuration invalide. <code>changed_when: false</code> indique qu'un test ne modifie rien.</p>
+<h3 id="tache-5-tester-une-connexion-par-cle">Tâche 5 : tester une connexion par clé</h3>
+<pre><code class="language-yaml">    - name: Tester une connexion avec la cle privee
+      ansible.builtin.command:
+        argv:
+          - ssh
+          - -i
+          - &quot;{{ ssh_private_key_file }}&quot;
+          - -o
+          - BatchMode=yes
+          - -o
+          - StrictHostKeyChecking=accept-new
+          - -p
+          - &quot;{{ ansible_port | default(22) | string }}&quot;
+          - &quot;{{ ansible_user }}@{{ ansible_host | default(inventory_hostname) }}&quot;
+          - &quot;true&quot;
+      delegate_to: localhost
+      become: false
+      changed_when: false
+</code></pre>
+<p>Lance sur la machine de contrôle la commande :</p>
+<pre><code class="language-bash">ssh -i ~/.ssh/id_ed25519 -o BatchMode=yes -o StrictHostKeyChecking=accept-new -p 22 user@serveur true
+</code></pre>
+<ul>
+<li><code>-i</code> : utilise explicitement la clé privée.</li>
+<li><code>BatchMode=yes</code> : interdit toute demande de mot de passe. Si la clé ne marche pas, la connexion échoue au lieu d'attendre une saisie. C'est ce qui prouve que l'authentification par clé fonctionne.</li>
+<li><code>StrictHostKeyChecking=accept-new</code> : accepte automatiquement l'empreinte d'un serveur jamais vu, mais refuse si l'empreinte a changé (protection contre une usurpation).</li>
+<li><code>-p</code> : port, pris dans <code>ansible_port</code> ou 22 par défaut (<code>| string</code> convertit en texte, requis dans <code>argv</code>).</li>
+<li><code>user@hôte</code> : <code>ansible_host</code> s'il existe, sinon le nom d'inventaire.</li>
+<li><code>true</code> : commande distante qui ne fait rien et retourne 0.</li>
+<li><code>delegate_to: localhost</code> : la tâche s'exécute sur la machine de contrôle, pas sur le serveur (c'est elle qui joue le rôle de client SSH).</li>
+<li><code>become: false</code> : pas de sudo, on doit utiliser vos clés dans votre <code>~/.ssh</code>.</li>
+<li><code>changed_when: false</code> : simple test.</li>
+</ul>
+<h3 id="tache-6-desactiver-les-mots-de-passe">Tâche 6 : désactiver les mots de passe</h3>
+<pre><code class="language-yaml">    - name: Desactiver l'authentification par mot de passe
+      ansible.builtin.copy:
+        dest: /etc/ssh/sshd_config.d/99-ansible-hardening.conf
+        owner: root
+        group: root
+        mode: '0644'
+        content: |
+          PasswordAuthentication no
+          KbdInteractiveAuthentication no
+      notify: Reload SSH
+</code></pre>
+<p>Cette tâche n'est atteinte que si le test de la tâche 5 a réussi.</p>
+<ul>
+<li><code>PasswordAuthentication no</code> : interdit la connexion par mot de passe.</li>
+<li><code>KbdInteractiveAuthentication no</code> : ferme aussi la porte dérobée du mode « clavier interactif » (PAM), qui permettrait sinon de saisir un mot de passe.</li>
+<li>Le préfixe <code>99-</code> place ce fichier en dernier dans l'ordre de lecture.</li>
+</ul>
+<h3 id="handlers">Handlers</h3>
+<pre><code class="language-yaml">  handlers:
+    - name: Reload SSH
+      ansible.builtin.service:
+        name: ssh
+        state: reloaded
+</code></pre>
+<p>Un handler n'est exécuté que s'il a été notifié, et une seule fois même si plusieurs tâches le notifient. Ici, <code>reloaded</code> recharge la configuration sans couper les sessions existantes. Sur Debian, le service s'appelle <code>ssh</code> (et non <code>sshd</code>).</p>
+<h3 id="points-dattention">Points d'attention</h3>
+<ol>
+<li><strong>Priorité des fichiers dans <code>sshd_config.d/</code></strong> : OpenSSH applique la première valeur rencontrée pour une directive, dans l'ordre alphabétique. Si un fichier plus ancien (par exemple <code>50-cloud-init.conf</code>) contient <code>PasswordAuthentication yes</code>, il sera lu avant <code>99-ansible-hardening.conf</code> et gagnera. Après exécution, vérifiez avec :
+   <code>bash
+   sudo sshd -T | grep -i -E "passwordauth|kbdinteractive|pubkeyauth"</code></li>
+<li><strong>Timing du handler</strong> : le rechargement a lieu à la fin du play. Donc le test de la tâche 5 se fait avant le rechargement, alors que le mot de passe est encore actif. Le test prouve que la clé fonctionne, mais pas que le serveur refusera les mots de passe. Pour cela, ajoutez <code>- ansible.builtin.meta: flush_handlers</code> après la tâche 6 si vous voulez recharger immédiatement.</li>
+<li><strong>Pas de validation de la 2e configuration</strong> : <code>sshd -t</code> est exécuté avant la tâche 6, donc il ne valide pas le fichier de durcissement. Une meilleure pratique est d'ajouter <code>validate: sshd -t -f %s</code> dans le module <code>copy</code>, ou de refaire un <code>sshd -t</code> après.</li>
+<li><strong>Dépendance</strong> : le module <code>ansible.posix.authorized_key</code> nécessite la collection <code>ansible.posix</code> (<code>ansible-galaxy collection install ansible.posix</code>).</li>
+</ol>
+<h3 id="utilisation">Utilisation</h3>
+<pre><code class="language-bash">ansible-playbook 1-ssh.yml
+</code></pre>
+<blockquote>
+<p>Gardez toujours une session SSH ouverte pendant le test, au cas où un problème surviendrait.</p>
+</blockquote>
+<hr />
+<h2 id="playbook-2-2-installation-applicationyml">Playbook 2 : <code>2-Installation-application.yml</code></h2>
+<h3 id="explication-ligne-par-ligne_1">Explication ligne par ligne</h3>
+<h3 id="en-tete-du-play_1">En-tête du play</h3>
+<pre><code class="language-yaml">---
+- name: Installation d'une application
+</code></pre>
+<p>Début du document YAML, puis début d'un play nommé (le nom s'affiche à l'exécution).</p>
+<pre><code class="language-yaml">  hosts: serveurs
+</code></pre>
+<p>Cible : le groupe <code>serveurs</code> de l'inventaire.</p>
+<pre><code class="language-yaml">  become: true
+</code></pre>
+<p>Élévation de privilèges (sudo), nécessaire pour installer des paquets et gérer des services.</p>
+<pre><code class="language-yaml">  vars:
+    application_package: apache2
+    application_service: apache2
+</code></pre>
+<p>Deux variables avec des valeurs par défaut :</p>
+<ul>
+<li><code>application_package</code> : le nom du paquet à installer.</li>
+<li><code>application_service</code> : le nom du service à démarrer.</li>
+</ul>
+<p>Elles sont séparées car le nom du paquet et celui du service ne sont pas toujours identiques (par exemple, le paquet <code>openssh-server</code> fournit le service <code>ssh</code>). Pour <code>apache2</code>, les deux noms coïncident.</p>
+<pre><code class="language-yaml">  tasks:
+</code></pre>
+<p>Début de la liste des tâches.</p>
+<h3 id="tache-1-verifier-le-nom-du-paquet">Tâche 1 : vérifier le nom du paquet</h3>
+<pre><code class="language-yaml">    - name: Verifier le nom du paquet
+      ansible.builtin.assert:
+        that:
+          - application_package | length &gt; 0
+        fail_msg: &quot;Aucun paquet n'a ete indique.&quot;
+</code></pre>
+<p>Le module <code>assert</code> fait échouer le playbook si la condition est fausse.</p>
+<ul>
+<li><code>application_package | length &gt; 0</code> : le filtre <code>length</code> compte les caractères de la variable. Si elle est vide (par exemple <code>-e application_package=""</code>), le playbook s'arrête avec le message d'erreur.</li>
+</ul>
+<p>C'est une protection : sans elle, <code>apt</code> serait appelé avec un nom vide, ce qui produirait une erreur peu claire.</p>
+<h3 id="tache-2-actualiser-les-depots">Tâche 2 : actualiser les dépôts</h3>
+<pre><code class="language-yaml">    - name: Actualiser les depots
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+</code></pre>
+<p>Équivalent de <code>apt update</code>.</p>
+<ul>
+<li><code>update_cache: true</code> : met à jour la liste des paquets disponibles.</li>
+<li><code>cache_valid_time: 3600</code> : si le cache a été actualisé il y a moins de 3600 secondes (1 heure), la mise à jour est sautée. Cela fait gagner du temps et rend la tâche idempotente.</li>
+</ul>
+<p>À comparer avec le playbook <code>3-Mise-a-jour.yml</code>, qui utilisait <code>cache_valid_time: 0</code> pour forcer l'actualisation à chaque fois.</p>
+<h3 id="tache-3-installer-lapplication">Tâche 3 : installer l'application</h3>
+<pre><code class="language-yaml">    - name: Installer l'application
+      ansible.builtin.apt:
+        name: &quot;{{ application_package }}&quot;
+        state: present
+</code></pre>
+<ul>
+<li><code>name: "{{ application_package }}"</code> : le nom vient de la variable (donc <code>apache2</code> par défaut). Les guillemets sont obligatoires en YAML quand une valeur commence par <code>{{</code>.</li>
+<li><code>state: present</code> : installe le paquet s'il est absent, ne fait rien s'il est déjà là (idempotent). Pour forcer la dernière version, on utiliserait <code>state: latest</code>.</li>
+</ul>
+<h3 id="tache-4-demarrer-et-activer-le-service">Tâche 4 : démarrer et activer le service</h3>
+<pre><code class="language-yaml">    - name: Demarrer et activer le service
+      ansible.builtin.service:
+        name: &quot;{{ application_service }}&quot;
+        state: started
+        enabled: true
+      when: application_service | length &gt; 0
+</code></pre>
+<p>Le module <code>service</code> gère les services système :</p>
+<ul>
+<li><code>state: started</code> : démarre le service s'il est arrêté (sans le redémarrer s'il tourne déjà).</li>
+<li><code>enabled: true</code> : l'active au démarrage de la machine (équivalent de <code>systemctl enable</code>).</li>
+</ul>
+<p>La clause <code>when: application_service | length &gt; 0</code> fait que la tâche n'est exécutée que si un nom de service est fourni. Cela permet d'installer une bibliothèque ou un outil sans service (par exemple <code>htop</code> ou <code>curl</code>) en passant <code>application_service=""</code>.</p>
+<h3 id="utilisation_1">Utilisation</h3>
+<p>Installation par défaut (apache2) :</p>
+<pre><code class="language-bash">ansible-playbook 2-Installation-application.yml
+</code></pre>
+<p>Installer une autre application en surchargeant les variables :</p>
+<pre><code class="language-bash">ansible-playbook 2-Installation-application.yml -e &quot;application_package=nginx application_service=nginx&quot;
+</code></pre>
+<p>Installer un paquet sans service :</p>
+<pre><code class="language-bash">ansible-playbook 2-Installation-application.yml -e &quot;application_package=htop application_service=&quot;
+</code></pre>
+<h3 id="remarques">Remarques</h3>
+<ul>
+<li>Sur Debian, l'installation d'un paquet comme <code>apache2</code> démarre généralement le service automatiquement, mais la tâche 4 garantit qu'il est bien démarré et activé au boot.</li>
+<li>Le playbook ne gère pas le pare-feu : si <code>ufw</code> est actif, il faudra ouvrir les ports (80/443) dans un autre playbook.</li>
+<li>Pour un paquet avec un nom de service différent, pensez à fournir les deux variables, sinon la tâche 4 échouera (service introuvable).</li>
+</ul>
+<hr />
+<h2 id="playbook-3-3-mise-a-jouryml">Playbook 3 : <code>3-Mise-a-jour.yml</code></h2>
+<h3 id="explication-ligne-par-ligne_2">Explication ligne par ligne</h3>
+<h3 id="en-tete-du-play_2">En-tête du play</h3>
+<pre><code class="language-yaml">---
+- name: Mise a jour des serveurs Debian
+</code></pre>
+<p>Début du document YAML, puis début d'un play nommé (le nom est affiché à l'exécution).</p>
+<pre><code class="language-yaml">  hosts: serveurs
+</code></pre>
+<p>Cible : le groupe <code>serveurs</code> de l'inventaire.</p>
+<pre><code class="language-yaml">  become: true
+</code></pre>
+<p>Élévation de privilèges (sudo), indispensable pour mettre à jour le système.</p>
+<pre><code class="language-yaml">  serial: 1
+</code></pre>
+<p>Le play est exécuté un serveur à la fois : Ansible termine toutes les tâches sur le serveur 1 avant de passer au serveur 2, etc. C'est une bonne pratique pour les mises à jour : si un serveur plante, les autres ne sont pas touchés, et vous évitez que tous les serveurs redémarrent en même temps.</p>
+<pre><code class="language-yaml">  vars:
+    reboot_if_required: false
+</code></pre>
+<p>Déclare une variable avec une valeur par défaut <code>false</code> : par défaut, le playbook ne redémarre pas les serveurs. On peut la modifier à l'exécution (voir plus bas).</p>
+<pre><code class="language-yaml">  tasks:
+</code></pre>
+<p>Début de la liste des tâches.</p>
+<h3 id="tache-1-actualiser-les-depots">Tâche 1 : actualiser les dépôts</h3>
+<pre><code class="language-yaml">    - name: Actualiser les depots
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 0
+</code></pre>
+<p>Équivalent de <code>apt update</code>.</p>
+<ul>
+<li><code>update_cache: true</code> : met à jour la liste des paquets disponibles.</li>
+<li><code>cache_valid_time: 0</code> : force la mise à jour même si le cache a été rafraîchi récemment (par défaut, Ansible peut sauter l'étape si le cache est récent).</li>
+</ul>
+<h3 id="tache-2-installer-les-mises-a-jour">Tâche 2 : installer les mises à jour</h3>
+<pre><code class="language-yaml">    - name: Installer les mises a jour disponibles
+      ansible.builtin.apt:
+        upgrade: dist
+        update_cache: true
+        dpkg_options: force-confdef,force-confold
+</code></pre>
+<ul>
+<li><code>upgrade: dist</code> : équivalent de <code>apt dist-upgrade</code> (ou <code>full-upgrade</code>). Contrairement à un simple <code>upgrade</code>, il peut installer de nouveaux paquets ou en supprimer pour résoudre les dépendances (utile pour les changements de noyau, par exemple).</li>
+<li><code>update_cache: true</code> : refait un <code>apt update</code> (redondant avec la tâche 1, mais sans danger).</li>
+<li><code>dpkg_options: force-confdef,force-confold</code> : évite les questions interactives sur les fichiers de configuration modifiés :</li>
+<li><code>force-confdef</code> : si dpkg peut décider seul, il le fait.</li>
+<li><code>force-confold</code> : en cas de conflit, conserve votre ancienne configuration plutôt que d'écraser avec celle du paquet.</li>
+</ul>
+<p>Sans ces options, une mise à jour pourrait rester bloquée en attente d'une réponse.</p>
+<h3 id="tache-3-verifier-si-un-redemarrage-est-necessaire">Tâche 3 : vérifier si un redémarrage est nécessaire</h3>
+<pre><code class="language-yaml">    - name: Verifier si un redemarrage est necessaire
+      ansible.builtin.stat:
+        path: /var/run/reboot-required
+      register: reboot_required
+</code></pre>
+<p>Sur Debian/Ubuntu, le fichier <code>/var/run/reboot-required</code> est créé après certaines mises à jour (noyau, libc, etc.). Le module <code>stat</code> teste son existence et le résultat est stocké dans <code>reboot_required</code>.</p>
+<blockquote>
+<p><strong>Note :</strong> ce fichier est créé par le paquet <code>update-notifier-common</code> (présent par défaut sur Ubuntu, mais pas toujours sur Debian). Sur un Debian minimal, il peut ne jamais exister même si un redémarrage serait utile. Vérifiez qu'il est installé si vous comptez sur ce mécanisme.</p>
+</blockquote>
+<h3 id="tache-4-signaler-le-besoin-de-redemarrage">Tâche 4 : signaler le besoin de redémarrage</h3>
+<pre><code class="language-yaml">    - name: Signaler un redemarrage necessaire
+      ansible.builtin.debug:
+        msg: &quot;Un redemarrage est necessaire sur {{ inventory_hostname }}.&quot;
+      when: reboot_required.stat.exists
+</code></pre>
+<p>Affiche un message si le fichier existe. <code>{{ inventory_hostname }}</code> est remplacé par le nom du serveur. Cette tâche est purement informative.</p>
+<h3 id="tache-5-redemarrer-si-demande">Tâche 5 : redémarrer si demandé</h3>
+<pre><code class="language-yaml">    - name: Redemarrer le serveur si demande
+      ansible.builtin.reboot:
+        reboot_timeout: 600
+        msg: &quot;Redemarrage effectue par Ansible&quot;
+      when:
+        - reboot_required.stat.exists
+        - reboot_if_required | bool
+</code></pre>
+<p>Le module <code>reboot</code> redémarre la machine, puis attend qu'elle soit de nouveau joignable avant de continuer.</p>
+<ul>
+<li><code>reboot_timeout: 600</code> : attend jusqu'à 600 secondes (10 min) le retour du serveur.</li>
+<li><code>msg</code> : message de diffusion affiché aux utilisateurs connectés.</li>
+</ul>
+<p>Les deux conditions du <code>when</code> doivent être vraies (liste = ET logique) :</p>
+<ol>
+<li>le fichier de redémarrage existe ;</li>
+<li>la variable <code>reboot_if_required</code> vaut vrai (le filtre <code>| bool</code> convertit proprement une chaîne comme <code>"true"</code> en booléen, utile quand la valeur vient de la ligne de commande).</li>
+</ol>
+<h3 id="utilisation_2">Utilisation</h3>
+<p>Mise à jour sans redémarrage (comportement par défaut) :</p>
+<pre><code class="language-bash">ansible-playbook 3-Mise-a-jour.yml
+</code></pre>
+<p>Mise à jour avec redémarrage automatique si nécessaire :</p>
+<pre><code class="language-bash">ansible-playbook 3-Mise-a-jour.yml -e reboot_if_required=true
+</code></pre>
+<h3 id="remarques_1">Remarques</h3>
+<ul>
+<li>Grâce à <code>serial: 1</code>, si un serveur échoue, Ansible arrête généralement le play pour la suite (comportement par défaut), ce qui protège le reste du parc.</li>
+<li>La tâche 1 est en partie redondante avec les <code>update_cache</code> de la tâche 2, mais cela ne pose pas de problème.</li>
+<li>La tâche « Installer les mises a jour » sera toujours signalée « changed » seulement si des paquets ont réellement été mis à jour : le module est idempotent.</li>
+</ul>
+<hr />
+<h2 id="playbook-4-4-politique-de-securite">Playbook 4 : <code>4-politique-de-securite</code></h2>
+<h3 id="explication-ligne-par-ligne_3">Explication ligne par ligne</h3>
+<h3 id="en-tete-du-playbook">En-tête du playbook</h3>
+<pre><code class="language-yaml">---
+</code></pre>
+<p>Marqueur de début d'un document YAML. Obligatoire par convention.</p>
+<pre><code class="language-yaml">- name: Configuration de la politique des mots de passe
+</code></pre>
+<p>Début d'un play (une liste en YAML commence par <code>-</code>). Le <code>name</code> est simplement une description affichée à l'exécution.</p>
+<pre><code class="language-yaml">  hosts: serveurs
+</code></pre>
+<p>Les machines ciblées : le groupe <code>serveurs</code> défini dans votre inventaire Ansible.</p>
+<pre><code class="language-yaml">  become: true
+</code></pre>
+<p>Élévation de privilèges (équivalent de <code>sudo</code>) pour toutes les tâches. Nécessaire car on modifie des fichiers système.</p>
+<pre><code class="language-yaml">  tasks:
+</code></pre>
+<p>Début de la liste des tâches, exécutées dans l'ordre.</p>
+<h3 id="tache-1-installation-des-paquets">Tâche 1 : installation des paquets</h3>
+<pre><code class="language-yaml">    - name: Installer les outils de controle des mots de passe
+      ansible.builtin.apt:
+        name:
+          - libpam-pwquality
+          - cracklib-runtime
+        state: present
+        update_cache: true
+</code></pre>
+<p>Utilise le module <code>apt</code> (Debian/Ubuntu). Deux paquets à installer :</p>
+<ul>
+<li><code>libpam-pwquality</code> : le module PAM qui contrôle la qualité des mots de passe.</li>
+<li><code>cracklib-runtime</code> : les dictionnaires pour détecter les mots de passe trop faibles.</li>
+</ul>
+<p><code>present</code> = installer s'il n'est pas déjà là. <code>update_cache: true</code> = faire un <code>apt update</code> avant.</p>
+<h3 id="tache-2-verifier-la-presence-du-profil-pam">Tâche 2 : vérifier la présence du profil PAM</h3>
+<pre><code class="language-yaml">    - name: Verifier la presence du profil PAM pwquality
+      ansible.builtin.stat:
+        path: /usr/share/pam-configs/pwquality
+      register: pam_profile
+</code></pre>
+<p>Le module <code>stat</code> récupère des informations sur un fichier. Le résultat est stocké (<code>register</code>) dans la variable <code>pam_profile</code>. Ce fichier est le profil que <code>pam-auth-update</code> utilise pour activer le module.</p>
+<h3 id="tache-3-assertion">Tâche 3 : assertion</h3>
+<pre><code class="language-yaml">    - name: Verifier que le profil PAM existe
+      ansible.builtin.assert:
+        that:
+          - pam_profile.stat.exists
+        fail_msg: &quot;Le profil PAM pwquality est introuvable.&quot;
+</code></pre>
+<p>Le module <code>assert</code> fait échouer le playbook si la condition est fausse. Ici : si le fichier n'existe pas, on s'arrête avec le message d'erreur. Ça évite de continuer sur une base cassée.</p>
+<h3 id="tache-4-verifier-si-pwquality-est-deja-actif">Tâche 4 : vérifier si pwquality est déjà actif</h3>
+<pre><code class="language-yaml">    - name: Verifier si pwquality est deja active dans PAM
+      ansible.builtin.command:
+        argv:
+          - grep
+          - -q
+          - pam_pwquality.so
+          - /etc/pam.d/common-password
+      register: pam_check
+      failed_when: false
+      changed_when: false
+</code></pre>
+<p>Exécute <code>grep -q pam_pwquality.so /etc/pam.d/common-password</code>. L'option <code>-q</code> (quiet) n'affiche rien : seul le code retour compte (0 = trouvé, 1 = absent). <code>argv</code> passe les arguments sous forme de liste, plus sûr qu'une chaîne de commande.</p>
+<ul>
+<li><code>register</code> : stocke le résultat (dont le code retour <code>rc</code>).</li>
+<li><code>failed_when: false</code> : la tâche n'échoue jamais, même si <code>grep</code> renvoie 1.</li>
+<li><code>changed_when: false</code> : une simple lecture ne doit pas être comptée comme une modification.</li>
+</ul>
+<h3 id="tache-5-activer-le-module">Tâche 5 : activer le module</h3>
+<pre><code class="language-yaml">    - name: Activer le module pwquality dans PAM
+      ansible.builtin.command:
+        argv:
+          - pam-auth-update
+          - --enable
+          - pwquality
+      when: pam_check.rc != 0
+      changed_when: true
+</code></pre>
+<p>Exécute <code>pam-auth-update --enable pwquality</code>, qui modifie les fichiers <code>/etc/pam.d/common-*</code> pour insérer le module.</p>
+<ul>
+<li><code>when</code> : n'exécute la tâche que si <code>grep</code> n'a pas trouvé le module (code retour différent de 0). Cela rend le playbook idempotent.</li>
+<li><code>changed_when: true</code> : la tâche est toujours marquée « changed » quand elle s'exécute.</li>
+</ul>
+<h3 id="tache-6-creer-le-dossier-de-configuration">Tâche 6 : créer le dossier de configuration</h3>
+<pre><code class="language-yaml">    - name: Creer le dossier de configuration
+      ansible.builtin.file:
+        path: /etc/security/pwquality.conf.d
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+</code></pre>
+<p>Crée le répertoire <code>pwquality.conf.d</code> (s'il n'existe pas), appartenant à root, avec les droits <code>rwxr-xr-x</code> (lecture pour tous, écriture pour root seul). Les fichiers de ce dossier complètent <code>/etc/security/pwquality.conf</code>.</p>
+<h3 id="tache-7-appliquer-la-politique">Tâche 7 : appliquer la politique</h3>
+<pre><code class="language-yaml">    - name: Appliquer la politique de complexite
+      ansible.builtin.copy:
+        dest: /etc/security/pwquality.conf.d/99-ansible.conf
+        owner: root
+        group: root
+        mode: '0644'
+        backup: true
+        content: |
+          minlen = 14
+          ucredit = -1
+          lcredit = -1
+          dcredit = -1
+          ocredit = -1
+          maxrepeat = 3
+          maxsequence = 3
+          difok = 4
+          dictcheck = 1
+          usercheck = 1
+          gecoscheck = 1
+          retry = 3
+          enforcing = 1
+          enforce_for_root
+</code></pre>
+<p>Le module <code>copy</code> crée un fichier à partir du contenu fourni. Le préfixe <code>99-</code> garantit qu'il est lu en dernier (et donc prioritaire). Droits <code>rw-r--r--</code>. <code>backup: true</code> sauvegarde l'ancienne version avant écrasement.</p>
+<p>Le <code>|</code> indique un bloc de texte multiligne, conservé tel quel.</p>
+<p><strong>Contenu du fichier :</strong></p>
+<table>
+<thead>
+<tr>
+<th>Paramètre</th>
+<th>Signification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>minlen = 14</code></td>
+<td>Longueur minimale de 14 caractères</td>
+</tr>
+<tr>
+<td><code>ucredit = -1</code></td>
+<td>Au moins 1 majuscule (valeur négative = minimum obligatoire)</td>
+</tr>
+<tr>
+<td><code>lcredit = -1</code></td>
+<td>Au moins 1 minuscule</td>
+</tr>
+<tr>
+<td><code>dcredit = -1</code></td>
+<td>Au moins 1 chiffre</td>
+</tr>
+<tr>
+<td><code>ocredit = -1</code></td>
+<td>Au moins 1 caractère spécial</td>
+</tr>
+<tr>
+<td><code>maxrepeat = 3</code></td>
+<td>Pas plus de 3 fois le même caractère consécutif (ex. <code>aaaa</code> refusé)</td>
+</tr>
+<tr>
+<td><code>maxsequence = 3</code></td>
+<td>Pas plus de 3 caractères en séquence (ex. <code>abcd</code>, <code>1234</code> refusés)</td>
+</tr>
+<tr>
+<td><code>difok = 4</code></td>
+<td>Au moins 4 caractères différents de l'ancien mot de passe</td>
+</tr>
+<tr>
+<td><code>dictcheck = 1</code></td>
+<td>Refuse les mots du dictionnaire</td>
+</tr>
+<tr>
+<td><code>usercheck = 1</code></td>
+<td>Refuse un mot de passe contenant le nom d'utilisateur</td>
+</tr>
+<tr>
+<td><code>gecoscheck = 1</code></td>
+<td>Refuse un mot de passe contenant des éléments du champ GECOS (nom complet, etc.)</td>
+</tr>
+<tr>
+<td><code>retry = 3</code></td>
+<td>3 tentatives avant échec de la commande <code>passwd</code></td>
+</tr>
+<tr>
+<td><code>enforcing = 1</code></td>
+<td>Le refus est effectif (0 = simple avertissement)</td>
+</tr>
+<tr>
+<td><code>enforce_for_root</code></td>
+<td>Applique aussi les règles à root</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tache-8-verification-finale">Tâche 8 : vérification finale</h3>
+<pre><code class="language-yaml">    - name: Verifier la presence du module PAM
+      ansible.builtin.command:
+        argv:
+          - grep
+          - pam_pwquality.so
+          - /etc/pam.d/common-password
+      changed_when: false
+</code></pre>
+<p>Même <code>grep</code> qu'avant, mais sans <code>-q</code> : la ligne trouvée est affichée. Si le module est absent, <code>grep</code> renvoie 1 et la tâche échoue (pas de <code>failed_when: false</code> ici), ce qui sert de contrôle final.</p>
+<h3 id="tache-9-message-de-fin">Tâche 9 : message de fin</h3>
+<pre><code class="language-yaml">    - name: Afficher le resultat
+      ansible.builtin.debug:
+        msg: &quot;La politique de complexite des mots de passe est configuree sur {{ inventory_hostname }}.&quot;
+</code></pre>
+<p>Affiche un message. <code>{{ inventory_hostname }}</code> est une variable Jinja2 remplacée par le nom de chaque serveur dans l'inventaire.</p>
+<h3 id="remarques_2">Remarques</h3>
+<ul>
+<li>Le fichier s'appelle <code>4-politique-de-securite</code> sans extension <code>.yml</code> : ça fonctionne, mais l'extension est conseillée.</li>
+<li>Les tâches <code>command</code> avec <code>grep</code> pourraient être remplacées par le module <code>ansible.builtin.lineinfile</code> ou <code>ansible.builtin.shell</code>, mais l'approche choisie est correcte et idempotente.</li>
+<li><strong>Attention</strong> : <code>enforce_for_root</code> s'applique aussi à root, ce qui peut bloquer un changement de mot de passe si celui-ci ne respecte pas la politique.</li>
+</ul>
+<p>Pour lancer le playbook :</p>
+<pre><code class="language-bash">ansible-playbook 4-politique-de-securite
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>
