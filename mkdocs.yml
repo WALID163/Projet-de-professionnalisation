@@ -53,6 +53,7 @@ nav:
       - Activité 3 ExploitServ:
         - BLOC 2 Activité 3 Constatation des limites du protocole HTTP et migration vers le protocole HTTPS:
           - BLOC 2 Activité 3 Mise en place du port mirroring: CUB-BLOC2-Activité3-ExploitServ-PortMirroring.md
+          - BLOC 2 Activité 3 Scénario d_attaque par ARP Poisoning: CUB-BLOC2-Activité3-ExploitServ-ARPPoissoning.md
     - BLOC 3:
       - Situation 1 Cybersécurité:
         - BLOC 3 Situation 1 Cybersécurité: CUB-BLOC3-Situation1-Cybersécurité.md
